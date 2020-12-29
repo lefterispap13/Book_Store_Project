@@ -13,9 +13,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long role_id;
+    @Column(name="role_id")
+    private long roleId;
 
     @Column(name="type")
     private String type;

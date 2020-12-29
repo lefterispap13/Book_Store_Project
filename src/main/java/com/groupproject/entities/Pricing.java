@@ -17,7 +17,8 @@ public class Pricing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pricing_id;
+    @Column(name="pricing_id")
+    private Long pricingId;
 
     @Column(name="starting_price")
     private double startingPrice;

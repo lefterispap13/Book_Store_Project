@@ -18,7 +18,8 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long account_id;
+    @Column(name="account_id")
+    private Long accountId;
 
     @Column(name="username")
     private String username;
@@ -41,8 +42,11 @@ public class Account {
     @Column(name="gender")
     private String gender;
 
-    @Column(name="coins")
-    private double coins;
+//    @Column(name="coins")
+//    private double coins;
+
+    @OneToMany(mappedBy = "account")
+    private Set<Coins> coins;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="role_id",referencedColumnName = "role_id")
