@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,8 +42,9 @@ public class Book {
 
     //book_pricing_id(fk)
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="pricing_id",referencedColumnName = "id")
+    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
     private Pricing pricing;
+
     //author_id(fk)
     @ManyToMany
     @JoinTable(
@@ -70,7 +72,8 @@ public class Book {
     private Set<Language> languages;
 
 
-
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private Set<OrderDetails> orderDetails;
 
 
 

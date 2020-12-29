@@ -1,11 +1,19 @@
 package com.groupproject.entities;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="accounts")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
 
     @Id
@@ -21,7 +29,28 @@ public class Account {
     @Column(name="first_name")
     private String firstName;
 
-    @Column(name="lastName")
+    @Column(name="last_name")
     private String lastName;
+
+    @Column(name="date_of_birth")
+    private Date dateOfBirth;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="gender")
+    private String gender;
+
+    @Column(name="coins")
+    private double coins;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="role_id",referencedColumnName = "role_id")
+    private Role role;
+
+    //?????
+    @OneToMany(mappedBy = "account")
+    private Set<Order> orders;
+
 
 }

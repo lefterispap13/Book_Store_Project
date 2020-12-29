@@ -28,6 +28,6 @@ public class Publisher {
     @Column(name="city")
     private String city;
 
-    @OneToMany(mappedBy = "publishers")
+    @OneToMany(mappedBy = "publisher")
     private Set<Book> books;
 }
