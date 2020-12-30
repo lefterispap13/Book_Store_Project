@@ -57,12 +57,13 @@ public class Account {
     private Set<PurchaseHistory> purchaseHistorySet;
 
     public Account(String username, String password, String firstName,
-                   String lastName, Date dateOfBirth, String email, String gender) {
+                   String lastName, Date dateOfBirth, double coins,String email, String gender) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.coins=coins;
         this.email = email;
         this.gender = gender;
     }
