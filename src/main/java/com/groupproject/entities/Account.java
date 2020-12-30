@@ -42,8 +42,6 @@ public class Account {
     @Column(name="gender")
     private String gender;
 
-//    @Column(name="coins")
-//    private double coins;
 
     @OneToMany(mappedBy = "account")
     private Set<Coins> coins;
@@ -52,9 +50,17 @@ public class Account {
     @JoinColumn(name="role_id",referencedColumnName = "role_id")
     private Role role;
 
-    //?????
     @OneToMany(mappedBy = "account")
     private Set<Order> orders;
 
-
+    public Account(String username, String password, String firstName,
+                   String lastName, Date dateOfBirth, String email, String gender) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.gender = gender;
+    }
 }

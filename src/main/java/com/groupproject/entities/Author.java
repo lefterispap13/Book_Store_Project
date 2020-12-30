@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Author {
     private String country;
 
     @ManyToMany(mappedBy="authors")
+    @JsonIgnore
     private Set<Book> book;
 
     public Author(String firstName, String lastName) {
