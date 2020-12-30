@@ -6,26 +6,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="coins")
+@Table(name="account_purchase_history")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coins {
+public class PurchaseHistory {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="coins_id")
-    private double coinsId;
+    @Column(name="purchase_id")
+    private double purchaseId;
 
-    @Column(name="starting_coins")
-    private double startingCoins;
+    @Column(name="purchase_date")
+    private LocalDateTime purchaseDate;
+
+    @Column(name="euros_spent")
+    private double eurosSpent;
 
     @Column(name="purchased_coins")
     private double purchasedCoins;
 
     @ManyToOne
-    @JoinColumn(name="account_id",nullable=false)
+    @JoinColumn(name="account_id",referencedColumnName="account_id",nullable=false)
     private Account account;
 }

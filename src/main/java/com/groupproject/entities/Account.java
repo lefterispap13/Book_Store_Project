@@ -21,30 +21,30 @@ public class Account {
     @Column(name="account_id")
     private Long accountId;
 
-    @Column(name="username")
+    @Column(name="username", nullable = false)
     private String username;
 
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name="first_name")
+    @Column(name="first_name", nullable = false)
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name="last_name", nullable = false)
     private String lastName;
 
     @Column(name="date_of_birth")
     private Date dateOfBirth;
 
-    @Column(name="email")
+    @Column(name="email", nullable = false)
     private String email;
 
     @Column(name="gender")
     private String gender;
 
 
-    @OneToMany(mappedBy = "account")
-    private Set<Coins> coins;
+    @Column(name ="coins")
+    private double coins;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="role_id",referencedColumnName = "role_id")
@@ -52,6 +52,9 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private Set<Order> orders;
+
+    @OneToMany(mappedBy = "account")
+    private Set<PurchaseHistory> purchaseHistorySet;
 
     public Account(String username, String password, String firstName,
                    String lastName, Date dateOfBirth, String email, String gender) {
