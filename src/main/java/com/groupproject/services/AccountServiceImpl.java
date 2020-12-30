@@ -53,6 +53,7 @@ public class AccountServiceImpl implements IAccountService{
             existingAccount.setDateOfBirth(request.getDateOfBirth());
             existingAccount.setEmail(request.getEmail());
             existingAccount.setGender(request.getGender());
+            existingAccount.setCoins(request.getCoins());
             Account updatedAccount= accountRepository.save(existingAccount);
             log.info("The updated account is {}",updatedAccount);
             log.info("The updated account has been inserted to the DB");
