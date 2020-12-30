@@ -18,9 +18,9 @@ public interface IAccountService {
     boolean createAccount(AccountRequest request);
 
     //update account with id
-    boolean updateAccount(AccountRequest request);
+    AccountRequest updateAccount(Long id,AccountRequest request);
 
     //delete account with id
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
 }

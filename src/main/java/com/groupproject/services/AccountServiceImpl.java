@@ -42,12 +42,38 @@ public class AccountServiceImpl implements IAccountService{
     }
 
     @Override
-    public boolean updateAccount(AccountRequest request) {
-        return false;
+    public AccountRequest updateAccount(Long id,AccountRequest request) {
+        log.info("Ready to update an existing account");
+        if (accountRepository.findById(id).isPresent()){
+            Account existingAccount=accountRepository.findById(id).get();
+            existingAccount.setFirstName(request.getFirstName());
+            existingAccount.setLastName(request.getLastName());
+            existingAccount.setUsername(request.getUsername());
+            existingAccount.setPassword(request.getPassword());
+            existingAccount.setDateOfBirth(request.getDateOfBirth());
+            existingAccount.setEmail(request.getEmail());
+            existingAccount.setGender(request.getGender());
+            Account updatedAccount= accountRepository.save(existingAccount);
+            log.info("The updated account is {}",updatedAccount);
+            log.info("The updated account has been inserted to the DB");
+            return new AccountRequest(updatedAccount.getUsername(), updatedAccount.getPassword(),
+                    updatedAccount.getFirstName(), updatedAccount.getLastName(),
+                    updatedAccount.getDateOfBirth(), updatedAccount.getEmail(), updatedAccount.getGender());
+        }
+        log.info("The account has not been inserted to the DB");
+        return null;
     }
 
-    @Override
-    public void deleteById(Long id) {
 
+    @Override
+    public boolean deleteById(Long id) {
+        log.info("Ready to delete an account");
+        if (accountRepository.existsById(id)){
+            accountRepository.deleteById(id);
+            log.info("account deleted successfully");
+            return true;
+        }
+        log.info("account has not deleted successfully");
+        return false;
     }
 }
