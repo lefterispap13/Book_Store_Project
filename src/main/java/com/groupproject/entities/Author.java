@@ -34,8 +34,9 @@ public class Author {
     @JsonIgnore
     private Set<Book> book;
 
-    public Author(String firstName, String lastName) {
+    public Author(String firstName, String lastName, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.country = country;
     }
 }

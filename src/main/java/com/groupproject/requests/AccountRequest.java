@@ -21,5 +21,4 @@ public class AccountRequest {
     private String gender;
     private double coins;
     private Role role;
-
 }
