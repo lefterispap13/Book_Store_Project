@@ -46,7 +46,7 @@ public class Account {
     @Column(name ="coins")
     private double coins;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="role_id",referencedColumnName = "role_id")
     private Role role;
 
