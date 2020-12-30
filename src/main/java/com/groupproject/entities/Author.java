@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,8 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long author_id;
+    @Column(name="author_id")
+    private Long authorId;
 
     @Column(name="first_name")
     private String firstName;
@@ -25,7 +27,11 @@ public class Author {
     @Column(name="last_name")
     private String lastName;
 
+    @Column(name="country")
+    private String country;
+
     @ManyToMany(mappedBy="authors")
+    @JsonIgnore
     private Set<Book> book;
 
     public Author(String firstName, String lastName) {
