@@ -1,5 +1,6 @@
 package com.groupproject.requests;
 
+import com.groupproject.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,6 @@ public class AccountRequest {
     private String email;
     private String gender;
     private double coins;
-  //  private String role;
+    private Role role;
 
 }

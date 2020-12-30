@@ -46,7 +46,7 @@ public class Account {
     @Column(name ="coins")
     private double coins;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="role_id",referencedColumnName = "role_id")
     private Role role;
 
@@ -57,7 +57,7 @@ public class Account {
     private Set<PurchaseHistory> purchaseHistorySet;
 
     public Account(String username, String password, String firstName,
-                   String lastName, Date dateOfBirth, String email, String gender, double coins) {
+                   String lastName, Date dateOfBirth, String email, String gender, double coins,Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -66,5 +66,6 @@ public class Account {
         this.email = email;
         this.gender = gender;
         this.coins=coins;
+        this.role=role;
     }
 }
