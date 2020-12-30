@@ -34,7 +34,7 @@ public class AccountServiceImpl implements IAccountService{
     public boolean createAccount(AccountRequest request) {
         log.info("Ready to insert a new Account . The request is {}",request);
         Account account=new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
-                request.getDateOfBirth(), request.getEmail(), request.getGender());
+                request.getDateOfBirth(), request.getEmail(), request.getGender(),request.getCoins());
         Account newAccount= accountRepository.save(account);
         log.info("The new account is {}",newAccount);
         log.info("The account has been inserted to the DB");
@@ -58,7 +58,7 @@ public class AccountServiceImpl implements IAccountService{
             log.info("The updated account has been inserted to the DB");
             return new AccountRequest(updatedAccount.getUsername(), updatedAccount.getPassword(),
                     updatedAccount.getFirstName(), updatedAccount.getLastName(),
-                    updatedAccount.getDateOfBirth(), updatedAccount.getEmail(), updatedAccount.getGender());
+                    updatedAccount.getDateOfBirth(), updatedAccount.getEmail(), updatedAccount.getGender(),updatedAccount.getCoins());
         }
         log.info("The account has not been inserted to the DB");
         return null;

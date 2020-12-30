@@ -18,7 +18,7 @@ public class AccountRequest {
     private Date dateOfBirth;
     private String email;
     private String gender;
-   // private double coins;
+    private double coins;
   //  private String role;
 
 }
