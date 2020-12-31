@@ -56,8 +56,7 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private Set<PurchaseHistory> purchaseHistorySet;
 
-    public Account(String username, String password, String firstName,
-                   String lastName, Date dateOfBirth, double coins,String email, String gender) {
+    public Account(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender, double coins,Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -66,5 +65,7 @@ public class Account {
         this.coins=coins;
         this.email = email;
         this.gender = gender;
+        this.coins=coins;
+        this.role=role;
     }
 }
