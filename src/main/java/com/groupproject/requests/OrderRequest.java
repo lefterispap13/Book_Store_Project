@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class OrderRequest {
 
-    private long orderId;
     private LocalDateTime orderDate;
     private Account account;
     private double totalCoins;

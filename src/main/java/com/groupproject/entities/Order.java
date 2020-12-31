@@ -37,5 +37,10 @@ public class Order {
     private Set<OrderDetails> orderDetails;
 
 
-
+    public Order(LocalDateTime orderDate, Account account, double totalCoins, Set<OrderDetails> orderDetails) {
+        this.orderDate = orderDate;
+        this.account = account;
+        this.totalCoins = totalCoins;
+        this.orderDetails = orderDetails;
+    }
 }
