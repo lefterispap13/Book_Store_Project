@@ -30,7 +30,7 @@ public class OrderServiceImpl implements IOrderService{
     public boolean createOrder(OrderRequest request) {
         log.info("Ready to insert a new Author");
         Order order=new Order(request.getOrderId(),request.getOrderDate(),request.getAccount(), request.getTotalCoins(), request.getOrderDetails());
-        Order newOrder=new orderRepository.save(order);
+        Order newOrder=orderRepository.save(order);
         log.info("The new order is {}",newOrder);
         log.info("The order has been inserted to the DB");
         return true;
