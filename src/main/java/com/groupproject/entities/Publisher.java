@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +31,6 @@ public class Publisher {
     private String city;
 
     @OneToMany(mappedBy = "publisher")
+    @JsonIgnore
     private Set<Book> books;
 }

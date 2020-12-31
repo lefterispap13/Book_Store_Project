@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class Pricing {
     private Date endingDate;
 
     @OneToOne(mappedBy = "pricing")
+    @JsonIgnore
     private Book book;
 
 
