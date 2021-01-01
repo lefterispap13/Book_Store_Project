@@ -14,7 +14,7 @@ public interface ICategoryService {
     Category getById(Long id);
 
     // create new category
-    boolean createNewCategory(CategoryRequest request);
+    void createNewCategory(CategoryRequest request);
 
     // delete a category by id
     boolean deleteCategoryById(Long id);
