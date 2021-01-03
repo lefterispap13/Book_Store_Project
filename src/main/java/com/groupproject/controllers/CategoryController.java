@@ -1,5 +1,6 @@
 package com.groupproject.controllers;
 
+import com.groupproject.repository.AccountRepository;
 import com.groupproject.requests.CategoryRequest;
 import com.groupproject.responses.CategoryResponse;
 import com.groupproject.responses.Response;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value="/category")
 public class CategoryController {
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     private CategoryServiceImpl categoryService;
