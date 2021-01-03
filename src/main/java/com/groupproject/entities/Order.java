@@ -1,16 +1,20 @@
 package com.groupproject.entities;
 
-
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="orders")
@@ -22,7 +26,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_id")
-    private long orderId;
+    private Long orderId;
 
     @Column(name="order_date")
     private LocalDateTime orderDate;
@@ -38,6 +42,18 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order")
     private Set<OrderDetails> orderDetails;
 
+    public Order(Long orderId, LocalDateTime orderDate, Account account, double totalCoins) { //LocalDateTime
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.account = account;
+        this.totalCoins = totalCoins;
+    }
 
+    public Order(LocalDateTime orderDate, Account account, double totalCoins, Set<OrderDetails> orderDetails) { //LocalDateTime
+        this.orderDate = orderDate;
+        this.account = account;
+        this.totalCoins = totalCoins;
+        this.orderDetails = orderDetails;
+    }
 
 }
