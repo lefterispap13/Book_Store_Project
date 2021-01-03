@@ -7,14 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="roles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role implements Serializable {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

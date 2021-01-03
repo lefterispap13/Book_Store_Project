@@ -5,14 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="order_details")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetails implements Serializable {
+public class OrderDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
