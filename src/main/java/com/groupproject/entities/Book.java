@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book implements Serializable {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +50,6 @@ public class Book implements Serializable {
 
     //author_id(fk)
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -74,7 +72,6 @@ public class Book implements Serializable {
 
     //languages_id(fk)
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
@@ -86,33 +83,6 @@ public class Book implements Serializable {
     @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
-    public Book(String title, String pages, Date publicationDate, String description,
-                double rating, String isbn13, Pricing pricing, Set<Author> authors,
-                Publisher publisher, Set<Category> categories, Set<Language> languages,
-                Set<OrderDetails> orderDetails) {
-        this.title = title;
-        this.pages = pages;
-        this.publicationDate = publicationDate;
-        this.description = description;
-        this.rating = rating;
-        this.isbn13 = isbn13;
-        this.pricing = pricing;
-        this.authors = authors;
-        this.publisher = publisher;
-        this.categories = categories;
-        this.languages = languages;
-        this.orderDetails = orderDetails;
-    }
 
-    public Book(String title, String pages, Date publicationDate, String description,
-                double rating, String isbn13, Pricing pricing, Publisher publisher) {
-        this.title = title;
-        this.pages = pages;
-        this.publicationDate = publicationDate;
-        this.description = description;
-        this.rating = rating;
-        this.isbn13 = isbn13;
-        this.pricing = pricing;
-        this.publisher = publisher;
-    }
+
 }

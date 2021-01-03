@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
-@Slf4j
 @Service
+@Slf4j
 public class AuthorServiceImpl implements IAuthorService{
 
     @Autowired

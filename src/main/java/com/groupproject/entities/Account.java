@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account implements Serializable {
+public class Account {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -59,9 +58,7 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "account" ,fetch = FetchType.LAZY)
     private Set<PurchaseHistory> purchaseHistorySet;
 
-    public Account(String username, String password, String firstName,
-                   String lastName, Date dateOfBirth, String email,
-                   String gender, double coins,Role role) {
+    public Account(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender, double coins,Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
