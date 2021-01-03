@@ -1,11 +1,13 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -13,7 +15,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pricing {
+public class Pricing implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,7 @@ public class Pricing {
     private Date endingDate;
 
     @OneToOne(mappedBy = "pricing")
+    @JsonIgnore
     private Book book;
 
 
