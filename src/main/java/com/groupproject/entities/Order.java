@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class Order {
     private long orderId;
 
     @Column(name="order_date")
-    private LocalDateTime orderDate;
+    private Date orderDate; //LocalDateTime
 
     @ManyToOne
     @JoinColumn(name="account_id",nullable=false)
@@ -34,10 +35,17 @@ public class Order {
     private double totalCoins;
 
     @OneToMany(mappedBy = "order")
+    @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
+    public Order(Long orderId,Date orderDate, Account account, double totalCoins) { //LocalDateTime
+        this.orderId=orderId;
+        this.orderDate = orderDate;
+        this.account = account;
+        this.totalCoins = totalCoins;
+    }
 
-    public Order(LocalDateTime orderDate, Account account, double totalCoins, Set<OrderDetails> orderDetails) {
+    public Order(Date orderDate, Account account, double totalCoins, Set<OrderDetails> orderDetails) { //LocalDateTime
         this.orderDate = orderDate;
         this.account = account;
         this.totalCoins = totalCoins;

@@ -23,7 +23,7 @@ public class Role {
     @Column(name="type")
     private String type;
 
-    @OneToOne(mappedBy = "role")
+    @OneToOne(mappedBy = "role",fetch = FetchType.LAZY)//cascade = CascadeType.ALL, orphanRemoval = true laze solves the more than one row with the same id
     @JsonIgnore
     private Account account;
 

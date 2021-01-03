@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,14 +47,15 @@ public class Account {
     @Column(name ="coins")
     private double coins;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY )
     @JoinColumn(name="role_id",referencedColumnName = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY) ///lazy? to solve the problem?
+    @JsonIgnore
     private Set<Order> orders;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account" ,fetch = FetchType.LAZY)
     private Set<PurchaseHistory> purchaseHistorySet;
 
     public Account(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender, double coins,Role role) {

@@ -28,4 +28,10 @@ public class OrderDetails {
 
     @Column(name="price_after_discount")
     private double priceAfterDiscount;
+
+    public OrderDetails(Order order, Book book, double priceAfterDiscount) {
+        this.order = order;
+        this.book = book;
+        this.priceAfterDiscount = priceAfterDiscount;
+    }
 }

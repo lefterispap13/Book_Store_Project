@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class Book {
     //book_pricing_id(fk)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
+    @JsonIgnore
     private Pricing pricing;
 
     //author_id(fk)
@@ -51,11 +53,13 @@ public class Book {
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
+    @JsonIgnore
     private Set<Author> authors;
 
     //publisher_id(fk) ??
     @ManyToOne
     @JoinColumn(name="publisher_id",nullable=false)
+    @JsonIgnore
     private Publisher publisher;
 
     //categories_id(fk)
@@ -63,6 +67,7 @@ public class Book {
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JsonIgnore
     private Set<Category> categories;
 
     //languages_id(fk)
@@ -70,10 +75,12 @@ public class Book {
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
+    @JsonIgnore
     private Set<Language> languages;
 
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
 
