@@ -47,8 +47,12 @@ public class Account implements Serializable {
     @Column(name ="coins")
     private double coins;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="role_id",referencedColumnName = "role_id")
+//    @OneToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name="role_id",referencedColumnName = "role_id")
+//    private Role role;
+
+    @ManyToOne
+    @JoinColumn(name="role_id",nullable=false)
     private Role role;
 
     @OneToMany(mappedBy = "account")

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="roles")
@@ -24,9 +25,13 @@ public class Role implements Serializable {
     @Column(name="type")
     private String type;
 
-    @OneToOne(mappedBy = "role")
+//    @OneToOne(mappedBy = "role")
+//    @JsonIgnore
+//    private Account account;
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Account account;
+    private Set<Account> accounts;
 
 
 }

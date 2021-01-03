@@ -48,6 +48,8 @@ public class Book implements Serializable {
     @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
     private Pricing pricing;
 
+
+
     //author_id(fk)
     @ManyToMany
     @JsonIgnore
