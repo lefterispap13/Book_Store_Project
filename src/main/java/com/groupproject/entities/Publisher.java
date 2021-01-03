@@ -1,13 +1,11 @@
 package com.groupproject.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -15,7 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Publisher implements Serializable {
+public class Publisher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +30,5 @@ public class Publisher implements Serializable {
     private String city;
 
     @OneToMany(mappedBy = "publisher")
-    @JsonIgnore
     private Set<Book> books;
 }
