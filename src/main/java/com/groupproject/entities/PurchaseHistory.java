@@ -19,7 +19,7 @@ public class PurchaseHistory implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="purchase_id")
-    private double purchaseId;
+    private Long purchaseId;
 
     @Column(name="purchase_date")
     private LocalDateTime purchaseDate;
