@@ -1,9 +1,7 @@
 package com.groupproject.services;
 
-
 import com.groupproject.entities.Account;
 import com.groupproject.requests.AccountRequest;
-
 import java.util.List;
 
 public interface IAccountService {
@@ -18,7 +16,7 @@ public interface IAccountService {
     boolean createAccount(AccountRequest request);
 
     //update account with id
-    AccountRequest updateAccount(Long id,AccountRequest request);
+    Account updateAccount(Long id, AccountRequest request);
 
     //delete account with id
     boolean deleteById(Long id);
