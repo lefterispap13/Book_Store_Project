@@ -39,7 +39,10 @@ public class Pricing implements Serializable {
     @JsonIgnore
     private Book book;
 
-
-
-
+    public Pricing(double startingPrice, double discount, Date startingDate, Date endingDate) {
+        this.startingPrice = startingPrice;
+        this.discount = discount;
+        this.startingDate = startingDate;
+        this.endingDate = endingDate;
+    }
 }
