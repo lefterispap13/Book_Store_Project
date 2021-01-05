@@ -24,11 +24,7 @@ public class CategoryServiceImpl implements ICategoryService{
     @Override
     public List<Category> getAll() {
         log.info("Ready to found all the categories");
-        List<Category> all = categoryRepository.findAll();
-        for (Category current : all) {
-            System.out.println(current);
-        }
-        return all;
+        return categoryRepository.findAll();
     }
 
     // get a category by id

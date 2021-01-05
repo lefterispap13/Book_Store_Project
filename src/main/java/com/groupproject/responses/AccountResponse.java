@@ -1,11 +1,13 @@
 package com.groupproject.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.groupproject.entities.Account;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountResponse extends Response{
 
     private List<Account> accounts;

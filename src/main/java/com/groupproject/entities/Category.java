@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,7 @@ public class Category implements Serializable {
     private String type;
 
     @ManyToMany(mappedBy="categories")
+    @JsonIgnore //added for testing
     private Set<Book> book;
 
     public Category(String type, Set<Book> book) {

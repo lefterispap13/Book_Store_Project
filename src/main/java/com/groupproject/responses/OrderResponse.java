@@ -1,8 +1,13 @@
 package com.groupproject.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.groupproject.entities.Order;
+import lombok.Data;
+
 import java.util.List;
 
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderResponse extends Response {
 
     private List<Order> orders;
