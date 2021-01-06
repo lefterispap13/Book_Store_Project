@@ -34,4 +34,10 @@ public class Publisher implements Serializable {
     @OneToMany(mappedBy = "publisher")
     @JsonIgnore
     private Set<Book> books;
+
+    public Publisher(String name, String country, String city) {
+        this.name = name;
+        this.country = country;
+        this.city = city;
+    }
 }
