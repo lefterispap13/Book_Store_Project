@@ -26,4 +26,8 @@ public class Language implements Serializable {
 
     @ManyToMany(mappedBy="languages")
     private Set<Book> book;
+
+    public Language(String languageType) {
+        this.languageType = languageType;
+    }
 }

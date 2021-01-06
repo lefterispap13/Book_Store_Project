@@ -1,6 +1,5 @@
 package com.groupproject.services;
 
-import com.groupproject.entities.Author;
 import com.groupproject.entities.Pricing;
 import com.groupproject.repository.PricingRepository;
 import com.groupproject.requests.PricingRequest;
@@ -44,7 +43,7 @@ public class PricingServiceImpl implements IPricingService{
         return true;
     }
 
-    //test
+
     @Override
     public Pricing updatePrice(Long id, PricingRequest request) {
         log.info("Ready to update a price. The request is {}",request);
