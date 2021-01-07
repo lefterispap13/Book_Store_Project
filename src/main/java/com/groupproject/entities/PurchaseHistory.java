@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,12 @@ public class PurchaseHistory implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="account_id",referencedColumnName="account_id",nullable=false)
+    @JsonIgnore
     private Account account;
+
+    public PurchaseHistory(LocalDateTime purchaseDate, double eurosSpent, double purchasedCoins) {
+        this.purchaseDate = purchaseDate;
+        this.eurosSpent = eurosSpent;
+        this.purchasedCoins = purchasedCoins;
+    }
 }
