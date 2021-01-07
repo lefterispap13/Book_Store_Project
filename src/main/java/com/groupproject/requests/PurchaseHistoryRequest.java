@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -11,6 +12,8 @@ import java.time.LocalDateTime;
 public class PurchaseHistoryRequest {
 
     private LocalDateTime purchaseDate=LocalDateTime.now();
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String formatDateTime = purchaseDate.format(format);
 
     private double eurosSpent;
 

@@ -32,7 +32,7 @@ public class PurchaseHistory implements Serializable {
     private double purchasedCoins;
 
     @ManyToOne
-    @JoinColumn(name="account_id",referencedColumnName="account_id",nullable=false)
+    @JoinColumn(name="account_id",referencedColumnName="account_id")//,nullable=false)
     @JsonIgnore
     private Account account;
 
