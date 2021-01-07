@@ -7,7 +7,9 @@ import com.groupproject.responses.PurchaseHistoryResponse;
 import com.groupproject.responses.Response;
 import com.groupproject.services.PurchaseHistoryServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import static java.util.Objects.isNull;

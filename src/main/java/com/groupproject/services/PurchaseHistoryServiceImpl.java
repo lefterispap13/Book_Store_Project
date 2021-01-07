@@ -1,6 +1,8 @@
 package com.groupproject.services;
 
+import com.groupproject.entities.Account;
 import com.groupproject.entities.PurchaseHistory;
+import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.PurchaseHistoryRepository;
 import com.groupproject.requests.PurchaseHistoryRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Objects.isNull;
 
@@ -18,6 +22,9 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
 
     @Autowired
     private PurchaseHistoryRepository purchaseHistoryRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     // list of all purchases
     @Override
@@ -36,10 +43,16 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
     // new purchase
     @Override
     public void newPurchase(PurchaseHistoryRequest request) {
-        log.info("Ready to create a new Purchase");
-        PurchaseHistory purchaseHistory=new PurchaseHistory(request.getPurchaseDate(), request.getEurosSpent(), request.getPurchasedCoins());
-        purchaseHistoryRepository.save(purchaseHistory);
-        log.info("The new purchase has been inserted to the DB");
+            Long id=request.getAccountId();
+            Account account = accountRepository.findById(id).orElse(null);
+            if(isNull(account)){
+                log.info("Could not found the account");
+            }
+            log.info("Ready to create a new Purchase");
+            PurchaseHistory purchaseHistory = new PurchaseHistory(request.getPurchaseDate(), request.getEurosSpent(), request.getPurchasedCoins(), account);
+            purchaseHistoryRepository.save(purchaseHistory);
+            log.info("The new purchase has been inserted to the DB");
+
     }
 
     // update purchase by id

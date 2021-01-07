@@ -33,12 +33,13 @@ public class PurchaseHistory implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="account_id",referencedColumnName="account_id")//,nullable=false)
-    @JsonIgnore
+//    @JsonIgnore
     private Account account;
 
-    public PurchaseHistory(LocalDateTime purchaseDate, double eurosSpent, double purchasedCoins) {
+    public PurchaseHistory(LocalDateTime purchaseDate, double eurosSpent, double purchasedCoins, Account account) {
         this.purchaseDate = purchaseDate;
         this.eurosSpent = eurosSpent;
         this.purchasedCoins = purchasedCoins;
+        this.account = account;
     }
 }

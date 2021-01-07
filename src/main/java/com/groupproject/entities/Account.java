@@ -67,6 +67,7 @@ public class Account implements Serializable {
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<PurchaseHistory> purchaseHistorySet;
 
     public Account(String username, String password, String firstName,

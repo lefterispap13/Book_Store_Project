@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +19,8 @@ public class PurchaseHistoryRequest {
     private double eurosSpent;
 
     private double purchasedCoins;
+
+    private Long accountId;
 
 
 }
