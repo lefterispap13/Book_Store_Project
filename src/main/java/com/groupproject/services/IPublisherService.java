@@ -18,7 +18,7 @@ public interface IPublisherService {
     void addPublisher(PublisherRequest request);
 
     // update publisher by id
-    void updatePublisher(Long id,PublisherRequest request);
+    Publisher updatePublisher(Long id,PublisherRequest request);
 
     // delete publisher by id
     boolean deletePublisher(Long id);

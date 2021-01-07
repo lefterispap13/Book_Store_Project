@@ -24,35 +24,4 @@ public class BookRequest {
     private Pricing pricing;
 
 
-//    private List<Long> authorIds;
-
-//    private List<Long> categoryIds;
-//    private List<Long> languageIds;
-//    private List<Long> orderDetailsIds;
-//
-//    //???
-//    private Set<Author> authors;
-//    private Set<Category> categories;
-//    private Set<Language> languages;
-//    private Set<OrderDetails> orderDetails;
-//
-//    public BookRequest(String title, String pages,
-//                       Date publicationDate, String description,
-//                       double rating, String isbn13, Publisher publisher,
-//                       Pricing pricing, Set<Author> authors,
-//                       Set<Category> categories, Set<Language> languages,
-//                       Set<OrderDetails> orderDetails) {
-//        this.title = title;
-//        this.pages = pages;
-//        this.publicationDate = publicationDate;
-//        this.description = description;
-//        this.rating = rating;
-//        this.isbn13 = isbn13;
-//        this.publisher = publisher;
-//        this.pricing = pricing;
-//        this.authors = authors;
-//        this.categories = categories;
-//        this.languages = languages;
-//        this.orderDetails = orderDetails;
-//    }
 }

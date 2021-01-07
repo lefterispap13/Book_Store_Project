@@ -19,12 +19,14 @@ public class LanguageController {
     @Autowired
     private LanguageServiceImpl languageService;
 
+    // list of all languages -- GET method
     @GetMapping(value="/getall")
     public LanguageResponse getAll(){
         log.info("Found all the languages");
         return new LanguageResponse("Found all the languages", languageService.getAll());
     }
 
+    // get language by id -- GET method
     @GetMapping(value="/getbyid/{id}")
     public LanguageResponse getById(@PathVariable Long id){
         if (isNull(languageService.getById(id))){
@@ -35,13 +37,16 @@ public class LanguageController {
         return new LanguageResponse("Found the language", languageService.getById(id));
     }
 
-    @PostMapping(value="/new")
+    // add a new language -- POST method
+    @PostMapping(value="/new",consumes = "application/json",
+            produces = "application/json")
     public Response newLanguage(@RequestBody LanguageRequest request){
         log.info("Ready to create a new language");
         languageService.newLanguage(request);
         return new Response("The language has been saved");
     }
 
+    // delete a language -- DELETE method
     @DeleteMapping(value="/delete/{id}")
     public Response deleteLanguage(@PathVariable Long id){
         log.info("Ready to delete a language");

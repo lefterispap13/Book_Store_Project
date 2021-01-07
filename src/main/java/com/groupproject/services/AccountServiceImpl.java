@@ -69,7 +69,7 @@ public class AccountServiceImpl implements IAccountService{
             existingAccount.setCoins(request.getCoins());
         Account updatedAccount = accountRepository.save(existingAccount);
         log.info("The updated account is {}", updatedAccount);
-            log.info("The updated account has been inserted to the DB");
+        log.info("The updated account has been inserted to the DB");
         return updatedAccount;
 //        }
 //        log.info("The account does not exists");
