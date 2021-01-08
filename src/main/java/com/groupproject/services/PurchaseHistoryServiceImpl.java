@@ -63,9 +63,14 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
         if (isNull(purchaseHistory)){
             log.info("The Purchase does not exists");
         }
+        //testing
+        Long id1=request.getAccountId();
+        Account account = accountRepository.findById(id1).orElse(null);
+
         purchaseHistory.setPurchaseDate(request.getPurchaseDate());
         purchaseHistory.setEurosSpent(request.getEurosSpent());
         purchaseHistory.setPurchasedCoins(request.getPurchasedCoins());
+        purchaseHistory.setAccount(account);
         PurchaseHistory updatedPurchaseHistory=purchaseHistoryRepository.save(purchaseHistory);
         log.info("Purchase has been updated");
         return updatedPurchaseHistory;
@@ -77,10 +82,10 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
         log.info("Ready to delete a purchase with the id {}",id);
         if (purchaseHistoryRepository.existsById(id)){
             purchaseHistoryRepository.deleteById(id);
-            log.info("purchase deleted successfully");
+            log.info("Purchase has beendeleted successfully");
             return true;
         }
-        log.info("purchase has not deleted successfully");
+        log.info("Purchase has not been deleted successfully");
         return false;
     }
 }

@@ -64,6 +64,7 @@ public class Account implements Serializable {
     private Role role;
 
     @OneToMany(mappedBy = "account")
+    @JsonIgnore
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)

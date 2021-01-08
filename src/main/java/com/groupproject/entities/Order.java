@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,7 @@ public class Order implements Serializable {
     private double totalCoins;
 
     @OneToMany(mappedBy = "order")
+    @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
     public Order(Long orderId, LocalDateTime orderDate, Account account, double totalCoins) { //LocalDateTime

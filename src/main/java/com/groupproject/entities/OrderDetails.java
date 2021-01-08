@@ -33,13 +33,23 @@ public class OrderDetails implements Serializable {
     @JoinColumn(name="book_id",referencedColumnName="book_id",nullable=false)
     private Book book;
 
-    @Column(name="price_after_discount")
-    private double priceAfterDiscount;
+//    @Column(name="price_after_discount")
+//    private double priceAfterDiscount;
 
-    public OrderDetails(Order order, Book book, double priceAfterDiscount) {
+    @Column(name="original_price")
+    private double originalPrice;
 
+    @Column(name="discount_rate")
+    private double discountRate;
+
+    @Column(name="total_price")
+    private double totalPrice;
+
+    public OrderDetails(Order order, Book book, double originalPrice, double discountRate, double totalPrice) {
         this.order = order;
         this.book = book;
-        this.priceAfterDiscount = priceAfterDiscount;
+        this.originalPrice = originalPrice;
+        this.discountRate = discountRate;
+        this.totalPrice = totalPrice;
     }
 }
