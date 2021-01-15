@@ -7,17 +7,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
     @RequestMapping("/")
-    public ModelAndView viewHome(){
+    public ModelAndView viewHome() {
         return new ModelAndView("index");
     }
 
     @RequestMapping("/login")
-    public ModelAndView viewLogin(){
+    public ModelAndView viewLogin() {
         return new ModelAndView("login");
     }
 
     @RequestMapping("/register")
-    public ModelAndView viewRegister(){
+    public ModelAndView viewRegister() {
         return new ModelAndView("register");
     }
 }

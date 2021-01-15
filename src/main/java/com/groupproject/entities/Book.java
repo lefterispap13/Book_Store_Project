@@ -1,11 +1,13 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +50,7 @@ public class Book {
 
     //author_id(fk)
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -67,6 +70,7 @@ public class Book {
 
     //languages_id(fk)
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
@@ -74,8 +78,36 @@ public class Book {
 
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
+    public Book(String title, String pages, Date publicationDate, String description,
+                double rating, String isbn13, Pricing pricing, Set<Author> authors,
+                Publisher publisher, Set<Category> categories, Set<Language> languages,
+                Set<OrderDetails> orderDetails) {
+        this.title = title;
+        this.pages = pages;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.rating = rating;
+        this.isbn13 = isbn13;
+        this.pricing = pricing;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.categories = categories;
+        this.languages = languages;
+        this.orderDetails = orderDetails;
+    }
 
-
+    public Book(String title, String pages, Date publicationDate, String description,
+                double rating, String isbn13, Pricing pricing, Publisher publisher) {
+        this.title = title;
+        this.pages = pages;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.rating = rating;
+        this.isbn13 = isbn13;
+        this.pricing = pricing;
+        this.publisher = publisher;
+    }
 }

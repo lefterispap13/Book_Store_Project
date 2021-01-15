@@ -1,19 +1,20 @@
 package com.groupproject.controllers;
 
+import static java.util.Objects.isNull;
 
+import com.groupproject.entities.Account;
 import com.groupproject.requests.AccountRequest;
 import com.groupproject.responses.AccountResponse;
 import com.groupproject.responses.Response;
 import com.groupproject.services.AccountServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
 
 @Slf4j
 @RequestMapping(value="/account")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AccountController {
 
     @Autowired
@@ -47,7 +48,10 @@ public class AccountController {
     public Response updateExistingAccount(@PathVariable(value = "id") Long id,
                                           @RequestBody AccountRequest request){
         log.info("ready to update an account");
-        accountServiceImpl.updateAccount(id,request);
+        Account account = accountServiceImpl.updateAccount(id, request);
+        if (isNull(account)) {
+            return new Response("There is no such account");
+        }
         return new Response("The account has been updated");
     }
 

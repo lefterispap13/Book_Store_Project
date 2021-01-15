@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +35,9 @@ public class Author {
     @JsonIgnore
     private Set<Book> book;
 
-    public Author(String firstName, String lastName) {
+    public Author(String firstName, String lastName, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.country = country;
     }
 }

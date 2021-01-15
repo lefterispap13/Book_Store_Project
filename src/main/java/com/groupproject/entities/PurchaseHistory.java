@@ -1,11 +1,13 @@
 package com.groupproject.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,12 +15,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseHistory {
+public class PurchaseHistory implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="purchase_id")
-    private double purchaseId;
+    private Long purchaseId;
 
     @Column(name="purchase_date")
     private LocalDateTime purchaseDate;
@@ -30,6 +32,14 @@ public class PurchaseHistory {
     private double purchasedCoins;
 
     @ManyToOne
-    @JoinColumn(name="account_id",referencedColumnName="account_id",nullable=false)
+    @JoinColumn(name="account_id",referencedColumnName="account_id")//,nullable=false)
+//    @JsonIgnore
     private Account account;
+
+    public PurchaseHistory(LocalDateTime purchaseDate, double eurosSpent, double purchasedCoins, Account account) {
+        this.purchaseDate = purchaseDate;
+        this.eurosSpent = eurosSpent;
+        this.purchasedCoins = purchasedCoins;
+        this.account = account;
+    }
 }
