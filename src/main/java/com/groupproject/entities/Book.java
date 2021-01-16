@@ -49,8 +49,8 @@ public class Book implements Serializable {
     private Pricing pricing;
 
     //author_id(fk)
+    //@JsonIgnore
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -70,7 +70,6 @@ public class Book implements Serializable {
 
     //languages_id(fk)
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
@@ -78,7 +77,6 @@ public class Book implements Serializable {
 
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
     public Book(String title, String pages, Date publicationDate, String description,
