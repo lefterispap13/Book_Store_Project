@@ -1,36 +1,29 @@
-package configuration;
+package com.groupproject.configuration;
 
+import com.groupproject.security.AuthenticationFilter;
+import com.groupproject.security.AuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import com.groupproject.services.AccountServiceImpl;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.context.annotation.Bean;
-import security.AuthenticationFilter;
-import security.AuthorizationFilter;
 
-import static com.groupproject.constants.SecurityConstants.*;
-
+import static com.groupproject.constants.SecurityConstants.SIGN_UP_URL;
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-
-    @Autowired
     private AccountServiceImpl userDetailsService;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     public WebSecurity(AccountServiceImpl userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDetailsService = userDetailsService;
@@ -39,42 +32,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.httpBasic().disable().formLogin().disable();
-        http
-                .cors()
-                .and()
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/**", "/resources/**", "/static/**", "/css/**", "/**/*.js", "/**/*.css").hasAnyRole("USER", "ADMIN")
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.POST, SIGN_UP_URL).hasAnyRole("USER", "ADMIN")
                 .and()
                 .formLogin().loginPage("/").permitAll()
-                .defaultSuccessUrl("/homepage", true)
+                .defaultSuccessUrl("/", true)
                 .and()
                 .addFilter(new AuthenticationFilter(authenticationManager()))
                 .addFilter(new AuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-//    @Override
-//    protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        // We don't need CSRF for this example
-//        httpSecurity
-//                .cors()
-//                .and()
-//                .csrf()
-//                .disable()
-//                .headers()
-//                .frameOptions()
-//                .deny()
-//                .and()
-//                // dont authenticate this particular request
-//                .authorizeRequests().antMatchers("/**").permitAll();
-//                // all other requests need to be authenticated
-//
-//    }
-
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

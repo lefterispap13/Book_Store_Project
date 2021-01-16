@@ -1,4 +1,4 @@
-package security;
+package com.groupproject.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

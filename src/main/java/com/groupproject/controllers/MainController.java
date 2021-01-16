@@ -16,6 +16,7 @@ public class MainController {
         return new ModelAndView("login");
     }
 
+
     @RequestMapping("/register")
     public ModelAndView viewRegister() {
         return new ModelAndView("register");

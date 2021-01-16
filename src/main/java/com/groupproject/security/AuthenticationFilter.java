@@ -1,4 +1,4 @@
-package security;
+package com.groupproject.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupproject.entities.Account;
