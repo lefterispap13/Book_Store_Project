@@ -45,6 +45,6 @@ public class AuthorController {
     public Response deleteAccount(@PathVariable Long id){
         log.info("Ready to delete an author");
         authorService.deleteAuthor(id);
-        return new Response("The account has been deleted");
+        return new Response("The author has been deleted");
     }
 }
