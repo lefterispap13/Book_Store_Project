@@ -41,7 +41,8 @@ public class AccountServiceImpl implements IAccountService{
     public boolean createAccount(AccountRequest request) {
         log.info("Ready to insert a new Account . The request is {}",request);
 
-        Role role = roleRepository.findByTypeIgnoreCase(USER);
+//        Role role = roleRepository.findByTypeIgnoreCase(USER);
+        Role role = new Role(2L,"User");
 
         Account account=new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                 request.getDateOfBirth(), request.getEmail(), request.getGender(), DEFAULT_INITIAL_COINS, role);
@@ -59,14 +60,15 @@ public class AccountServiceImpl implements IAccountService{
             log.info("The account does not exists");
             return null;
         }
-            existingAccount.setFirstName(request.getFirstName());
-            existingAccount.setLastName(request.getLastName());
-            existingAccount.setUsername(request.getUsername());
-            existingAccount.setPassword(request.getPassword());
-            existingAccount.setDateOfBirth(request.getDateOfBirth());
-            existingAccount.setEmail(request.getEmail());
-            existingAccount.setGender(request.getGender());
-            existingAccount.setCoins(request.getCoins());
+        existingAccount.setFirstName(request.getFirstName());
+        existingAccount.setLastName(request.getLastName());
+        existingAccount.setUsername(request.getUsername());
+        existingAccount.setPassword(request.getPassword());
+        existingAccount.setDateOfBirth(request.getDateOfBirth());
+        existingAccount.setEmail(request.getEmail());
+        existingAccount.setGender(request.getGender());
+        existingAccount.setCoins(request.getCoins());
+        existingAccount.setRole(request.getRole());
         Account updatedAccount = accountRepository.save(existingAccount);
         log.info("The updated account is {}", updatedAccount);
         log.info("The updated account has been inserted to the DB");

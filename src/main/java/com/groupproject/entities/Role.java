@@ -42,4 +42,9 @@ public class Role implements Serializable {
     public Role(String type){
         this.type=type;
     }
+    public Role(Long roleId,String type){
+        this.roleId=roleId;
+        this.type=type;
+
+    }
 }

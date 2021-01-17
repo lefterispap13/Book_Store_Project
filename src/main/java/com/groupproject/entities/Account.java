@@ -83,7 +83,31 @@ public class Account implements Serializable {
         this.coins = coins;
         this.email = email;
         this.gender = gender;
-        this.coins = coins;
         this.role = role;
+    }
+    public Account(String username, String password, String firstName,
+                   String lastName, Date dateOfBirth, String email,
+                   String gender, double coins) {
+
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.coins = coins;
+        this.email = email;
+        this.gender = gender;
+    }
+    public Account(String username, String password, String firstName,
+                   String lastName, Date dateOfBirth, String email,
+                   String gender) {
+
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.gender = gender;
     }
 }
