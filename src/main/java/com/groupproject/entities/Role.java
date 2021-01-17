@@ -39,5 +39,7 @@ public class Role implements Serializable {
     @JsonIgnore
     private Set<Account> accounts;
 
-
+    public Role(String type){
+        this.type=type;
+    }
 }
