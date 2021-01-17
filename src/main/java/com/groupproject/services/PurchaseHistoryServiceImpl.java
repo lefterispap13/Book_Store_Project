@@ -53,9 +53,8 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
             PurchaseHistory purchaseHistory = new PurchaseHistory(now, request.getEurosSpent(), request.getPurchasedCoins(), account);
             purchaseHistoryRepository.save(purchaseHistory);
             log.info("The new purchase has been inserted to the DB");
-
     }
-
+    //test for commit
     // update purchase by id
     @Override
     public PurchaseHistory updatePurchase(Long id, PurchaseHistoryRequest request) {
