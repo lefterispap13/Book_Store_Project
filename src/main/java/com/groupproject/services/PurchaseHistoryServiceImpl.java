@@ -45,11 +45,12 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
     public void newPurchase(PurchaseHistoryRequest request) {
             Long id=request.getAccountId();
             Account account = accountRepository.findById(id).orElse(null);
+            LocalDateTime now = LocalDateTime.now();
             if(isNull(account)){
                 log.info("Could not found the account");
             }
             log.info("Ready to create a new Purchase");
-            PurchaseHistory purchaseHistory = new PurchaseHistory(request.getPurchaseDate(), request.getEurosSpent(), request.getPurchasedCoins(), account);
+            PurchaseHistory purchaseHistory = new PurchaseHistory(now, request.getEurosSpent(), request.getPurchasedCoins(), account);
             purchaseHistoryRepository.save(purchaseHistory);
             log.info("The new purchase has been inserted to the DB");
 
@@ -59,6 +60,7 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
     @Override
     public PurchaseHistory updatePurchase(Long id, PurchaseHistoryRequest request) {
         log.info("Ready to update a Purchase");
+        LocalDateTime now = LocalDateTime.now();
         PurchaseHistory purchaseHistory=purchaseHistoryRepository.findById(id).orElse(null);
         if (isNull(purchaseHistory)){
             log.info("The Purchase does not exists");
@@ -66,8 +68,7 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
         //testing
         Long id1=request.getAccountId();
         Account account = accountRepository.findById(id1).orElse(null);
-
-        purchaseHistory.setPurchaseDate(request.getPurchaseDate());
+        purchaseHistory.setPurchaseDate(now);
         purchaseHistory.setEurosSpent(request.getEurosSpent());
         purchaseHistory.setPurchasedCoins(request.getPurchasedCoins());
         purchaseHistory.setAccount(account);

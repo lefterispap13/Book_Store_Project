@@ -25,6 +25,7 @@ public class PurchaseHistory implements Serializable {
     @Column(name="purchase_date")
     private LocalDateTime purchaseDate;
 
+    //maybe needs first purchase date and update purchasedate?That is only  if we keep the update method
     @Column(name="euros_spent")
     private double eurosSpent;
 
