@@ -12,12 +12,12 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/role")
+@RequestMapping(value="/api/role")
 public class RoleController {
     @Autowired
     private RoleServiceImpl roleService;
-     // list of all roles -- GET method
 
+     // list of all roles -- GET method
      @GetMapping(value="/getall")
      public RoleResponse getAll(){
          log.info("Found all the roles");
@@ -43,11 +43,11 @@ public class RoleController {
          return new Response("The role has been saved");
      }
 
-        // delete a role -- DELETE method
-        @DeleteMapping(value="/delete/{id}")
-        public Response deleteRole(@PathVariable Long id){
-            log.info("Ready to delete a role");
-            roleService.deleteRole(id);
-            return new Response("The role has been successfully deleted");
-        }
+     // delete a role -- DELETE method
+     @DeleteMapping(value="/delete/{id}")
+     public Response deleteRole(@PathVariable Long id){
+         log.info("Ready to delete a role");
+         roleService.deleteRole(id);
+         return new Response("The role has been successfully deleted");
+     }
 }
