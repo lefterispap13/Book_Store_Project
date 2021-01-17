@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,12 @@ public class BookServiceImpl implements IBookService{
     @Autowired
     private OrderDetailsRepository orderDetailsRepository;
 
+    @Autowired
+    private PricingRepository pricingRepository;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
+
     // list of books
     @Override
     public List<Book> getAll() {
@@ -49,30 +56,37 @@ public class BookServiceImpl implements IBookService{
     @Override
     public void createNewBook(BookRequest request) {
         log.info("Ready to create a new Book");
-//        //find the Authors and add them to a list
-//        List<Long> authorsIds=request.getAuthorIds();
-//        Set<Author> authorsSet=new HashSet<>();
-//        for (Long current:authorsIds){
-//            Author author=authorRepository.findById(current).orElse(null);
-//            log.info("The author is {}",author);
-//            authorsSet.add(author);
-//        }
-//        //find the Categories and them to a list
-//        List<Long> categoriesIds=request.getCategoryIds();
-//        Set<Category> categorySet=new HashSet<>();
-//        for (Long current:categoriesIds){
-//            Category category=categoryRepository.findById(current).orElse(null);
-//            log.info("The category is {}",category);
-//            categorySet.add(category);
-//        }
-//        //find the Languages and them to a list
-//        List<Long> languagesIds=request.getLanguageIds();
-//        Set<Language> languageSet=new HashSet<>();
-//        for (Long current:languagesIds){
-//            Language language=languageRepository.findById(current).orElse(null);
-//            log.info("The language is {}",language);
-//            languageSet.add(language);
-//        }
+
+        Long pricingId=request.getPricingId();
+        Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
+
+        Long publisherId= request.getPublisherId();
+        Publisher publisher=publisherRepository.findById(publisherId).orElse(null);
+
+        //find the Authors and add them to a list
+        List<Long> authorsIds=request.getAuthorIds();
+        Set<Author> authorsSet=new HashSet<>();
+        for (Long current:authorsIds){
+            Author author=authorRepository.findById(current).orElse(null);
+            log.info("The author is {}",author);
+            authorsSet.add(author);
+        }
+        //find the Categories and them to a list
+        List<Long> categoriesIds=request.getCategoryIds();
+        Set<Category> categorySet=new HashSet<>();
+        for (Long current:categoriesIds){
+            Category category=categoryRepository.findById(current).orElse(null);
+            log.info("The category is {}",category);
+            categorySet.add(category);
+        }
+        //find the Languages and them to a list
+        List<Long> languagesIds=request.getLanguageIds();
+        Set<Language> languageSet=new HashSet<>();
+        for (Long current:languagesIds){
+            Language language=languageRepository.findById(current).orElse(null);
+            log.info("The language is {}",language);
+            languageSet.add(language);
+        }
 //        //find the OrderDetails and them to a list
 //        List<Long> orderDetailsIds=request.getOrderDetailsIds();
 //        Set<OrderDetails> orderDetailsSet=new HashSet<>();
@@ -81,19 +95,72 @@ public class BookServiceImpl implements IBookService{
 //            log.info("The Order Details is {}",orderDetails);
 //            orderDetailsSet.add(orderDetails);
 //        }
+
         log.info("Ready to save the new Book");
         Book book=new Book(request.getTitle(), request.getPages(),
                 request.getPublicationDate(),request.getDescription(), request.getRating(),
-                request.getIsbn13(),request.getPricing(), request.getPublisher());
+                request.getIsbn13(),pricing,authorsSet,publisher,categorySet,languageSet);
         bookRepository.save(book);
         log.info("The book has been saved successfully");
     }
 
-    //gia diagrafh
+    //update
     @Override
-    public BookRequest updateBook(Long id, BookRequest request) {
-        return null;
+    public Book updateBook(Long id, BookRequest request) {
+        log.info("Ready to create a new Book");
+
+        Long pricingId=request.getPricingId();
+        Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
+
+        Long publisherId= request.getPublisherId();
+        Publisher publisher=publisherRepository.findById(publisherId).orElse(null);
+
+        //find the Authors and add them to a list
+        List<Long> authorsIds=request.getAuthorIds();
+        Set<Author> authorsSet=new HashSet<>();
+        for (Long current:authorsIds){
+            Author author=authorRepository.findById(current).orElse(null);
+            log.info("The author is {}",author);
+            authorsSet.add(author);
+        }
+        //find the Categories and them to a list
+        List<Long> categoriesIds=request.getCategoryIds();
+        Set<Category> categorySet=new HashSet<>();
+        for (Long current:categoriesIds){
+            Category category=categoryRepository.findById(current).orElse(null);
+            log.info("The category is {}",category);
+            categorySet.add(category);
+        }
+        //find the Languages and them to a list
+        List<Long> languagesIds=request.getLanguageIds();
+        Set<Language> languageSet=new HashSet<>();
+        for (Long current:languagesIds){
+            Language language=languageRepository.findById(current).orElse(null);
+            log.info("The language is {}",language);
+            languageSet.add(language);
+        }
+
+        Book existingBook=bookRepository.findById(id).orElse(null);
+        existingBook.setTitle(request.getTitle());
+        existingBook.setPages(request.getPages());
+        existingBook.setPublicationDate(request.getPublicationDate());
+        existingBook.setDescription(request.getDescription());
+        existingBook.setRating(request.getRating());
+        existingBook.setIsbn13(request.getIsbn13());
+        existingBook.setPricing(pricing);
+        existingBook.setAuthors(authorsSet);
+        existingBook.setPublisher(publisher);
+        existingBook.setCategories(categorySet);
+        existingBook.setLanguages(languageSet);
+        Book updatedBook=bookRepository.save(existingBook);
+        log.info("The updated book is {}",updatedBook);
+        log.info("The updated Book has been inserted to the DB");
+
+        return updatedBook;
+
     }
+
+
 
 //    // update an existing book by id ??
 //    @Override

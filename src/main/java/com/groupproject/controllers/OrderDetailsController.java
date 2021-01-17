@@ -49,15 +49,15 @@ public class OrderDetailsController {
         return new Response("The OrderDetails have been saved");
     }
 
-    // update OrderDetails with id
-    @PutMapping(value = "/update/{id}", consumes = "application/json", produces = "application/json")
-    public Response updateExistingOrderDetails(@PathVariable(value = "id") Long id,
-            @RequestBody OrderDetailsRequest request) {
-
-        log.info("ready to update an OrderDetails");
-        orderDetailsServiceImpl.updateOrderDetails(id, request);
-        return new Response("The OrderDetails have been updated");
-    }
+//    // update OrderDetails with id
+//    @PutMapping(value = "/update/{id}", consumes = "application/json", produces = "application/json")
+//    public Response updateExistingOrderDetails(@PathVariable(value = "id") Long id,
+//            @RequestBody OrderDetailsRequest request) {
+//
+//        log.info("ready to update an OrderDetails");
+//        orderDetailsServiceImpl.updateOrderDetails(id, request);
+//        return new Response("The OrderDetails have been updated");
+//    }
 
     // delete OrderDetails by id
     @DeleteMapping("/delete/{id}")

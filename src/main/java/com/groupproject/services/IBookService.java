@@ -17,7 +17,7 @@ public interface IBookService {
     void createNewBook(BookRequest request);
 
     // update an existing book
-    BookRequest updateBook(Long id,BookRequest request);
+    Book updateBook(Long id,BookRequest request);
 
     // delete a book from id
     boolean deleteBookById(Long id);
