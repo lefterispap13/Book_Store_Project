@@ -41,7 +41,7 @@ public class AccountServiceImpl implements IAccountService{
     public boolean createAccount(AccountRequest request) {
         log.info("Ready to insert a new Account . The request is {}",request);
 
-//        Role role = roleRepository.findByTypeIgnoreCase(USER);
+//      Role role = roleRepository.findByTypeIgnoreCase(USER);
         Role role = new Role(2L,"User");
 
         Account account=new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
