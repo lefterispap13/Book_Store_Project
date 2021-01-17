@@ -1,5 +1,6 @@
 package com.groupproject.controllers;
 
+import com.groupproject.entities.Role;
 import com.groupproject.requests.RoleRequest;
 import com.groupproject.responses.Response;
 import com.groupproject.responses.RoleResponse;
@@ -43,6 +44,16 @@ public class RoleController {
          return new Response("The role has been saved");
      }
 
+     // update role with id
+     @PutMapping(value="/update/{id}",consumes = "application/json", produces = "application/json")
+     public Response updateExistingRole(@PathVariable(value = "id") Long id, @RequestBody RoleRequest request){
+         log.info("ready to update a role");
+         Role role = roleService.updateRole(id, request);
+         if (isNull(role)) {
+             return new Response("There is no such role");
+         }
+         return new Response("The role has been updated");
+     }
      // delete a role -- DELETE method
      @DeleteMapping(value="/delete/{id}")
      public Response deleteRole(@PathVariable Long id){
