@@ -2,6 +2,7 @@ package com.groupproject.services;
 
 import static com.groupproject.constants.Constants.DEFAULT_INITIAL_COINS;
 import static com.groupproject.constants.Constants.USER;
+import static java.util.Collections.emptyList;
 import static java.util.Objects.isNull;
 
 import com.groupproject.entities.Account;
@@ -21,9 +22,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
-import static java.util.Collections.emptyList;
-
 @Slf4j
 @Service
 public class AccountServiceImpl implements IAccountService, UserDetailsService {
@@ -41,7 +39,6 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
         this.accountRepository = accountRepository;
     }
 
-
     @Override
     public List<Account> getAll() {
         log.info("Ready to get all the Accounts");
@@ -58,7 +55,8 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
     public boolean createAccount(AccountRequest request) {
         log.info("Ready to insert a new Account . The request is {}", request);
 
-        Role role = roleRepository.findByTypeIgnoreCase(USER);
+//      Role role = roleRepository.findByTypeIgnoreCase(USER);
+        Role role = new Role(2L, "User");
 
         Account account = new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                 request.getDateOfBirth(), request.getEmail(), request.getGender(), DEFAULT_INITIAL_COINS, role);
@@ -85,6 +83,7 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
         existingAccount.setEmail(request.getEmail());
         existingAccount.setGender(request.getGender());
         existingAccount.setCoins(request.getCoins());
+        existingAccount.setRole(request.getRole());
         Account updatedAccount = accountRepository.save(existingAccount);
         log.info("The updated account is {}", updatedAccount);
         log.info("The updated account has been inserted to the DB");
@@ -117,4 +116,3 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
     }
 
 }
-

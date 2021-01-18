@@ -15,7 +15,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @RestController
-@RequestMapping(value ="/publisher")
+@RequestMapping(value ="/api/publisher")
 public class PublisherController {
 
     @Autowired

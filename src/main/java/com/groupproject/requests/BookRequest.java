@@ -20,8 +20,14 @@ public class BookRequest {
     private String description;
     private double rating;
     private String isbn13;
-    private Publisher publisher;
-    private Pricing pricing;
+    private Long publisherId;
+    private Long pricingId;
+
+    //testing
+    private List<Long> authorIds;
+    private List<Long> categoryIds;
+    private List<Long> languageIds;
+
 
 
 }

@@ -13,7 +13,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/language")
+@RequestMapping(value="/api/language")
 public class LanguageController {
 
     @Autowired

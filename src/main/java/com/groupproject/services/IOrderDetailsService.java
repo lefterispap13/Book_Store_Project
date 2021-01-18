@@ -15,8 +15,8 @@ public interface IOrderDetailsService {
     //new order
     boolean createOrderDetails(OrderDetailsRequest request);
 
-    //update orderDetails with id
-    OrderDetails updateOrderDetails(Long id, OrderDetailsRequest request);
+//    //update orderDetails with id
+//    OrderDetails updateOrderDetails(Long id, OrderDetailsRequest request);
 
     //delete orderDetails with id
     boolean deleteById(Long id);

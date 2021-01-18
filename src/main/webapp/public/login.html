@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../static/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="../static/fonts/ionicons.min.css">
     <link rel="stylesheet" href="../static/css/styles.min.css">
+    <script src="../static/js/login.js"></script>
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
@@ -47,13 +49,13 @@
         <div class="form-group">
             <div class="input-icon">
                 <i data-feather="user"></i>
-                <input required="required" type="text" class="form-control" placeholder="Username" name="username">
+                <input required="required" type="text" class="form-control" placeholder="Username" id="username" name="username">
             </div>
         </div>
         <div class="form-group">
             <div class="input-icon">
                 <i data-feather="lock"></i>
-                <input required="required" type="password" class="form-control" placeholder="Password" name="password">
+                <input required="required" type="password" class="form-control" placeholder="Password" id="password" name="password">
                 <div class="invalid-feedback">Incorrect username or password</div>
             </div>
         </div>
@@ -68,7 +70,7 @@
                 password ?</a>
         </div>
         <button type="submit"
-                class="btn btn-primary btn-block">LOGIN</button>
+                class="btn btn-primary btn-block" id="loginBtn">LOGIN</button>
     </form>
         </div>
     </div>

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/category")
+@RequestMapping(value="/api/category")
 public class CategoryController {
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountRepository accountRepository;//??????
 
     @Autowired
     private CategoryServiceImpl categoryService;

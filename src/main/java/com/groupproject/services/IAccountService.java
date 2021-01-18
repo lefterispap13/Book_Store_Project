@@ -18,6 +18,10 @@ public interface IAccountService {
     //update account with id
     Account updateAccount(Long id, AccountRequest request);
 
+//    //update account's coins
+//    Account updateAccountCoins(Long id, AccountRequest request);
+
     //delete account with id
     boolean deleteById(Long id);
+
 }
