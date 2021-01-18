@@ -79,7 +79,7 @@ public class BookServiceImpl implements IBookService{
             log.info("The category is {}",category);
             categorySet.add(category);
         }
-        //find the Languages and them to a list
+        //find the Languages and add them to a list
         List<Long> languagesIds=request.getLanguageIds();
         Set<Language> languageSet=new HashSet<>();
         for (Long current:languagesIds){

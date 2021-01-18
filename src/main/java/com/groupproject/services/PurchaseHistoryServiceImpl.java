@@ -43,8 +43,8 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
     // new purchase
     @Override
     public void newPurchase(PurchaseHistoryRequest request) {
-            Long id=request.getAccountId();
-            Account account = accountRepository.findById(id).orElse(null);
+            Long accountId=request.getAccountId();
+            Account account = accountRepository.findById(accountId).orElse(null);
             if(isNull(account)){
                 log.info("Could not found the account");
             }
@@ -52,6 +52,9 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
             PurchaseHistory purchaseHistory = new PurchaseHistory(request.getPurchaseDate(), request.getEurosSpent(), request.getPurchasedCoins(), account);
             purchaseHistoryRepository.save(purchaseHistory);
             log.info("The new purchase has been inserted to the DB");
+
+            // TODO:adding coins to the account
+
 
     }
 
@@ -64,8 +67,8 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
             log.info("The Purchase does not exists");
         }
         //testing
-        Long id1=request.getAccountId();
-        Account account = accountRepository.findById(id1).orElse(null);
+        Long accountId=request.getAccountId();
+        Account account = accountRepository.findById(accountId).orElse(null);
 
         purchaseHistory.setPurchaseDate(request.getPurchaseDate());
         purchaseHistory.setEurosSpent(request.getEurosSpent());
@@ -82,7 +85,7 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
         log.info("Ready to delete a purchase with the id {}",id);
         if (purchaseHistoryRepository.existsById(id)){
             purchaseHistoryRepository.deleteById(id);
-            log.info("Purchase has beendeleted successfully");
+            log.info("Purchase has been deleted successfully");
             return true;
         }
         log.info("Purchase has not been deleted successfully");
