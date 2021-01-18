@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value="/api/category")
 public class CategoryController {
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountRepository accountRepository;//??????
 
     @Autowired
     private CategoryServiceImpl categoryService;
