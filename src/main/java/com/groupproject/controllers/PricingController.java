@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/pricing")
+@RequestMapping(value="/api/pricing")
 public class PricingController {
 
     @Autowired

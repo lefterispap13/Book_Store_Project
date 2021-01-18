@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/purchase")
+@RequestMapping(value="/api/purchase")
 public class PurchaseHistoryController {
 
     @Autowired
