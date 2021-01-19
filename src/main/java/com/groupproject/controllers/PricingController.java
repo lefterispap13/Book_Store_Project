@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(value="/api/pricing")
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class PricingController {
 
     @Autowired

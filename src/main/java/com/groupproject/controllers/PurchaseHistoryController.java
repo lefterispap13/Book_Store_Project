@@ -17,6 +17,7 @@ import static java.util.Objects.isNull;
 @Slf4j
 @RestController
 @RequestMapping(value="/api/purchasehistory")
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class PurchaseHistoryController {
 
     @Autowired

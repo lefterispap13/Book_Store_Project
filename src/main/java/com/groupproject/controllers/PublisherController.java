@@ -16,6 +16,7 @@ import static java.util.Objects.isNull;
 @Slf4j
 @RestController
 @RequestMapping(value ="/api/publisher")
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class PublisherController {
 
     @Autowired

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(value="/api/book")
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class BookController {
 
     @Autowired

@@ -14,6 +14,7 @@ import static java.util.Objects.isNull;
 @Slf4j
 @RestController
 @RequestMapping(value="/api/language")
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class LanguageController {
 
     @Autowired
