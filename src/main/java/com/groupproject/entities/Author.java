@@ -33,7 +33,7 @@ public class Author implements Serializable {
 
     @ManyToMany(mappedBy="authors")
     @JsonIgnore
-    private Set<Book> book;
+    private Set<Book> books;
 
     public Author(String firstName, String lastName, String country) {
         this.firstName = firstName;

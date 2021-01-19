@@ -79,7 +79,9 @@ public class Book implements Serializable {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Set<OrderDetails> orderDetails;
 
-    public Book(String title, String pages, Date publicationDate, String description, double rating, String isbn13, Pricing pricing, Set<Author> authors, Publisher publisher, Set<Category> categories, Set<Language> languages) {
+    public Book(String title, String pages, Date publicationDate, String description,
+                double rating, String isbn13, Pricing pricing, Set<Author> authors,
+                Publisher publisher, Set<Category> categories, Set<Language> languages) {
         this.title = title;
         this.pages = pages;
         this.publicationDate = publicationDate;

@@ -27,9 +27,10 @@ public class Language implements Serializable {
 
     @ManyToMany(mappedBy="languages")
     @JsonIgnore
-    private Set<Book> book;
+    private Set<Book> books;
 
     public Language(String languageType) {
         this.languageType = languageType;
     }
+
 }
