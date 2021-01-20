@@ -44,7 +44,7 @@ public class Book implements Serializable {
     //book_pricing_id(fk)
     @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
+    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id",unique = true)
     private Pricing pricing;
 
     //author_id(fk)
