@@ -50,7 +50,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             System.out.println(user);
             if (user != null) {
                 if (user.contains("ROLE_USER")) {
-                    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
                     return new UsernamePasswordAuthenticationToken(user, null, authorities);
                 } else if ((user.contains("ROLE_ADMIN"))) {
