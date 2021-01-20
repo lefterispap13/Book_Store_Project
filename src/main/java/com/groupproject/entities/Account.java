@@ -2,6 +2,7 @@ package com.groupproject.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,10 +55,6 @@ public class Account implements Serializable {
 
     @Column(name = "coins")
     private double coins;
-
-//    @OneToOne(cascade = CascadeType.MERGE)
-//    @JoinColumn(name="role_id",referencedColumnName = "role_id")
-//    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "role_id")

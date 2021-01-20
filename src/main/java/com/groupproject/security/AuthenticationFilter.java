@@ -7,8 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -19,17 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.groupproject.constants.SecurityConstants.*;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
-
-    List<GrantedAuthority> authorityList;
-    final SimpleGrantedAuthority AdminAuthority = new SimpleGrantedAuthority("ADMIN");
-    final SimpleGrantedAuthority UserAuthority = new SimpleGrantedAuthority("USER");
 
     public AuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -40,10 +33,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
             Account applicationUser = new ObjectMapper().readValue(req.getInputStream(), Account.class);
-//            authorityList.add(UserAuthority);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(applicationUser.getUsername(),
-                            applicationUser.getPassword(),new ArrayList<>())
+                            applicationUser.getPassword(), new ArrayList<>())
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -61,7 +53,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(String.valueOf(((User) auth.getPrincipal()).getAuthorities()))
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
-//        res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         PrintWriter out = res.getWriter();
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");

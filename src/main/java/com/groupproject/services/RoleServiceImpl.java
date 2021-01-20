@@ -63,4 +63,8 @@ public class RoleServiceImpl implements  IRoleService{
         roleRepository.deleteById(id);
         return true;
     }
+//    @Override
+//    public Role findById(int id) {
+//        return roleRepository.findById(id);
+//    }
 }

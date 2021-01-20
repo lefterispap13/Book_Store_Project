@@ -2,20 +2,15 @@ package com.groupproject.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-
-import com.groupproject.services.AccountServiceImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +23,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         super(authManager);
     }
 
+    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -38,9 +35,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             chain.doFilter(request, response);
             return;
         }
-
-        UsernamePasswordAuthenticationToken authentication =authenticate(request);
-
+        UsernamePasswordAuthenticationToken authentication = authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
     }
@@ -50,27 +45,22 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         if (token != null) {
             String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
-
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
             System.out.println(user);
             if (user != null) {
-                    if (user.contains("ROLE_USER")) {
-                        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                        return new UsernamePasswordAuthenticationToken(user, null, authorities);
-                    }else if((user.contains("ROLE_ADMIN"))){
-                        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                        return new UsernamePasswordAuthenticationToken(user, null, authorities);
-                    }
-            }else{
-                return  null;
+                if (user.contains("ROLE_USER")) {
+                    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+                    return new UsernamePasswordAuthenticationToken(user, null, authorities);
+                } else if ((user.contains("ROLE_ADMIN"))) {
+                    authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                    return new UsernamePasswordAuthenticationToken(user, null, authorities);
+                }
+            } else {
+                return null;
             }
-
         }
         return null;
     }
 }
-//    UserDetails principal = AccountServiceImpl.loadUserByUsername(username);
-//                return new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
