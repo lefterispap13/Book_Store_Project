@@ -45,8 +45,7 @@ public class Order implements Serializable {
     @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
-    public Order(Long orderId, LocalDateTime orderDate, Account account, double totalCoins) { //LocalDateTime
-        this.orderId = orderId;
+    public Order(LocalDateTime orderDate, Account account, double totalCoins) {
         this.orderDate = orderDate;
         this.account = account;
         this.totalCoins = totalCoins;
