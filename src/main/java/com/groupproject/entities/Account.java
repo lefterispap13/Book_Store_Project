@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "accounts")
@@ -59,14 +60,17 @@ public class Account implements Serializable {
 //    @JoinColumn(name="role_id",referencedColumnName = "role_id")
 //    private Role role;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private Set<Order> orders;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<PurchaseHistory> purchaseHistorySet;

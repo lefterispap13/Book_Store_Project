@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name="orders")
@@ -34,6 +35,7 @@ public class Order implements Serializable {
     private LocalDateTime orderDate;
 
     // ????
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="account_id",nullable=false)
     private Account account;
@@ -41,6 +43,7 @@ public class Order implements Serializable {
     @Column(name="total_coins")
     private double totalCoins;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "order")
     @JsonIgnore
     private Set<OrderDetails> orderDetails;
@@ -51,7 +54,7 @@ public class Order implements Serializable {
         this.totalCoins = totalCoins;
     }
 
-    public Order(LocalDateTime orderDate, Account account, double totalCoins) { //LocalDateTime
+    public Order(LocalDateTime orderDate, Account account, double totalCoins,Set<OrderDetails> orderDetails) { //LocalDateTime
         this.orderDate = orderDate;
         this.account = account;
         this.totalCoins = totalCoins;
