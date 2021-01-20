@@ -14,5 +14,5 @@ public class OrderRequest {
 
     private Account account;
     private double totalCoins;
-    private Set<OrderDetails> orderDetails;
+//    private Set<OrderDetails> orderDetails;
 }

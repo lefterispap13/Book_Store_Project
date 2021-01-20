@@ -52,7 +52,7 @@ public class Order implements Serializable {
         this.totalCoins = totalCoins;
     }
 
-    public Order(LocalDateTime orderDate, Account account, double totalCoins, Set<OrderDetails> orderDetails) { //LocalDateTime
+    public Order(LocalDateTime orderDate, Account account, double totalCoins) { //LocalDateTime
         this.orderDate = orderDate;
         this.account = account;
         this.totalCoins = totalCoins;

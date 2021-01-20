@@ -49,6 +49,20 @@ public class LanguageServiceImpl implements ILanguageService{
         log.info("saved successfully");
     }
 
+    @Override
+    public Language updateLanguage(Long id, LanguageRequest request) {
+        log.info("Ready to update an existing language");
+        Language existingLanguage = languageRepository.findById(id).orElse(null);
+        if (isNull(existingLanguage)) {
+            log.info("The language does not exists");
+            return null;
+        }
+        existingLanguage.setLanguageType(request.getLanguageType());
+        Language updatedLanguage = languageRepository.save(existingLanguage);
+        log.info("The updated Language is {}", updatedLanguage);
+        log.info("The updated Language has been inserted to the DB");
+        return updatedLanguage;
+        }
 
 
     @Override

@@ -33,7 +33,7 @@ public class OrderServiceImpl implements IOrderService {
 
         log.info("Ready to insert a new Order");
         LocalDateTime now = LocalDateTime.now();
-        Order order = new Order(now, request.getAccount(), request.getTotalCoins(), request.getOrderDetails());
+        Order order = new Order(now, request.getAccount(), request.getTotalCoins());
         Order newOrder = orderRepository.save(order);
         log.info("The new order is {}", newOrder);
         log.info("The order has been inserted to the DB");
