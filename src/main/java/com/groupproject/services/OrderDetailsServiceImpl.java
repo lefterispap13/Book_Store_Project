@@ -9,6 +9,8 @@ import com.groupproject.repository.OrderDetailsRepository;
 import com.groupproject.repository.OrderRepository;
 import com.groupproject.repository.PricingRepository;
 import com.groupproject.requests.OrderDetailsRequest;
+
+import java.util.Date;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,10 +58,17 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
         //i want to do originalPrice = startingPrice from pricing
         double originalPrice = book.getPricing().getStartingPrice();
-
+//        Date dateNow=new Date();
+//        double discountRate = 0;
+//        if (book.getPricing().getEndingDate()!=null
+//                && book.getPricing().getStartingDate()!=null
+//                &&dateNow.after(book.getPricing().getStartingDate())
+//                &&dateNow.before(book.getPricing().getEndingDate())) {
+//            //i want to do discountRate = discount from pricing
+//             discountRate = book.getPricing().getDiscount();
+//        }
         //i want to do discountRate = discount from pricing
         double discountRate = book.getPricing().getDiscount();
-
         //i want to do totalPrice = originalPrice - (originalPrice * discountRate)
         double totalPrice = originalPrice - ( originalPrice * discountRate);
 
