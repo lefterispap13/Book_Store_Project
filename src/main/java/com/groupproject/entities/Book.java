@@ -2,10 +2,7 @@ package com.groupproject.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,12 +39,14 @@ public class Book implements Serializable {
     private String isbn13;
 
     //book_pricing_id(fk)
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
     private Pricing pricing;
 
     //author_id(fk)
     //@JsonIgnore
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
@@ -55,11 +54,13 @@ public class Book implements Serializable {
     private Set<Author> authors;
 
     //publisher_id(fk) ??
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="publisher_id",nullable=false)
     private Publisher publisher;
 
     //categories_id(fk)
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
@@ -67,6 +68,7 @@ public class Book implements Serializable {
     private Set<Category> categories;
 
     //languages_id(fk)
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
@@ -75,6 +77,7 @@ public class Book implements Serializable {
 
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Set<OrderDetails> orderDetails;
 
     public Book(String title, String pages, Date publicationDate, String description,
