@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name="order_details")
@@ -21,10 +22,12 @@ public class OrderDetails implements Serializable {
     @Column(name="order_details_id")
     private Long orderDetailsId;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="order_id",nullable=false)
     private Order order;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="book_id",referencedColumnName="book_id",nullable=false)
     @JsonIgnore

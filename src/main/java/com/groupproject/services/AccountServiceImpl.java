@@ -60,6 +60,11 @@ public class AccountServiceImpl implements IAccountService{
             log.info("The account does not exists");
             return null;
         }
+        //find the role
+        log.info("Ready to find the role");
+        Long roleId=request.getRoleId();
+        Role role=roleRepository.findById(roleId).orElse(null);
+
         existingAccount.setFirstName(request.getFirstName());
         existingAccount.setLastName(request.getLastName());
         existingAccount.setUsername(request.getUsername());
@@ -68,7 +73,7 @@ public class AccountServiceImpl implements IAccountService{
         existingAccount.setEmail(request.getEmail());
         existingAccount.setGender(request.getGender());
         existingAccount.setCoins(request.getCoins());
-        existingAccount.setRole(request.getRole());
+        existingAccount.setRole(role);
         Account updatedAccount = accountRepository.save(existingAccount);
         log.info("The updated account is {}", updatedAccount);
         log.info("The updated account has been inserted to the DB");
