@@ -3,6 +3,7 @@ package com.groupproject.controllers;
 import static java.util.Objects.isNull;
 
 import com.groupproject.entities.Account;
+import com.groupproject.repository.AccountRepository;
 import com.groupproject.requests.AccountRequest;
 import com.groupproject.responses.AccountResponse;
 import com.groupproject.responses.Response;
@@ -19,6 +20,7 @@ public class AccountController {
 
     @Autowired
     private AccountServiceImpl accountServiceImpl;
+
 
     // list of all the accounts
     @GetMapping(value="/getall")
@@ -38,9 +40,11 @@ public class AccountController {
     @PostMapping(value="/new",consumes = "application/json",
             produces = "application/json")
     public Response createNewAccount(@RequestBody AccountRequest request){
-        log.info("Ready to create a new Account");
-        accountServiceImpl.createAccount(request);
-        return new Response("The account has been saved");
+
+            log.info("Ready to create a new Account");
+            accountServiceImpl.createAccount(request);
+            return new Response("The account has been saved");
+
     }
 
     // update account with id

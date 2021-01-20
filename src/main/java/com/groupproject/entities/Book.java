@@ -3,7 +3,6 @@ package com.groupproject.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -41,7 +40,7 @@ public class Book implements Serializable {
     //book_pricing_id(fk)
     @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
+    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id",unique = true)
     private Pricing pricing;
 
     //author_id(fk)
@@ -76,8 +75,8 @@ public class Book implements Serializable {
     private Set<Language> languages;
 
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Set<OrderDetails> orderDetails;
 
     public Book(String title, String pages, Date publicationDate, String description,

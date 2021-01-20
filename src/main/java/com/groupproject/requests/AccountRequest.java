@@ -18,7 +18,10 @@ public class AccountRequest {
     private String email;
     private String gender;
     private double coins;
-    private Role role;
+//    private Role role;
+
+    //changed role to roleId
+    private Long roleId;
 
     public AccountRequest(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender) {
 
@@ -42,9 +45,8 @@ public class AccountRequest {
         this.gender = gender;
         this.coins = coins;
     }
-//    private Role role;
-    public AccountRequest(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender, double coins,Role role) {
 
+    public AccountRequest(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender, double coins, Long roleId) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -53,6 +55,19 @@ public class AccountRequest {
         this.email = email;
         this.gender = gender;
         this.coins = coins;
-        this.role=role;
+        this.roleId = roleId;
     }
+    //    private Role role;
+//    public AccountRequest(String username, String password, String firstName, String lastName, Date dateOfBirth, String email, String gender, double coins,Role role) {
+//
+//        this.username = username;
+//        this.password = password;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.dateOfBirth = dateOfBirth;
+//        this.email = email;
+//        this.gender = gender;
+//        this.coins = coins;
+//        this.role=role;
+//    }
 }

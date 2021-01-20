@@ -10,6 +10,8 @@ import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.RoleRepository;
 import com.groupproject.requests.AccountRequest;
 import java.util.List;
+
+import com.groupproject.responses.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,12 +46,14 @@ public class AccountServiceImpl implements IAccountService{
 //      Role role = roleRepository.findByTypeIgnoreCase(USER);
         Role role = new Role(2L,"User");
 
-        Account account=new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
+        Account account = new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                 request.getDateOfBirth(), request.getEmail(), request.getGender(), DEFAULT_INITIAL_COINS, role);
-        Account newAccount= accountRepository.save(account);
-        log.info("The new account is {}",newAccount);
+        Account newAccount = accountRepository.save(account);
+        log.info("The new account is {}", newAccount);
         log.info("The account has been inserted to the DB");
         return true;
+
+
     }
 
     @Override
@@ -60,6 +64,11 @@ public class AccountServiceImpl implements IAccountService{
             log.info("The account does not exists");
             return null;
         }
+        //find the role
+        log.info("Ready to find the role");
+        Long roleId=request.getRoleId();
+        Role role=roleRepository.findById(roleId).orElse(null);
+
         existingAccount.setFirstName(request.getFirstName());
         existingAccount.setLastName(request.getLastName());
         existingAccount.setUsername(request.getUsername());
@@ -68,7 +77,7 @@ public class AccountServiceImpl implements IAccountService{
         existingAccount.setEmail(request.getEmail());
         existingAccount.setGender(request.getGender());
         existingAccount.setCoins(request.getCoins());
-        existingAccount.setRole(request.getRole());
+        existingAccount.setRole(role);
         Account updatedAccount = accountRepository.save(existingAccount);
         log.info("The updated account is {}", updatedAccount);
         log.info("The updated account has been inserted to the DB");
