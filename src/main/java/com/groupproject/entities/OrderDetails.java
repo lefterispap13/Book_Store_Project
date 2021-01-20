@@ -1,6 +1,7 @@
 package com.groupproject.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

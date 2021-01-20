@@ -46,18 +46,18 @@ public class Pricing implements Serializable {
         this.endingDate = endingDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Pricing pricing = (Pricing) o;
-
-        return pricingId.equals(pricing.pricingId);
-    }
-
-    @Override
-    public int hashCode() {
-        return pricingId.hashCode();
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Pricing pricing = (Pricing) o;
+//
+//        return pricingId.equals(pricing.pricingId);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return pricingId.hashCode();
+//    }
 }
