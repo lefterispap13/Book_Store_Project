@@ -1,7 +1,9 @@
 package com.groupproject.services;
 
 
+import com.groupproject.entities.Book;
 import com.groupproject.entities.Language;
+import com.groupproject.repository.BookRepository;
 import com.groupproject.repository.LanguageRepository;
 import com.groupproject.requests.LanguageRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,10 @@ public class LanguageServiceImpl implements ILanguageService{
 
     @Autowired
     private LanguageRepository languageRepository;
+
+    //testing
+    @Autowired
+    private BookRepository bookRepository;
 
 
     @Override

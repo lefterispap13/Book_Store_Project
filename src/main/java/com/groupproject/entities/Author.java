@@ -31,13 +31,35 @@ public class Author implements Serializable {
     @Column(name="country")
     private String country;
 
-    @ManyToMany(mappedBy="authors")
+    @ManyToMany(mappedBy="authors", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Book> book;
+    private Set<Book> books;
 
     public Author(String firstName, String lastName, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hashCode(authorId);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Author other = (Author) obj;
+        return Objects.equals(authorId, other.authorId);
     }
 }
