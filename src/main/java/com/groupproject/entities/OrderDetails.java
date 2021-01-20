@@ -48,4 +48,19 @@ public class OrderDetails implements Serializable {
         this.discountRate = discountRate;
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderDetailsId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderDetails that = (OrderDetails) o;
+
+        return orderDetailsId.equals(that.orderDetailsId);
+    }
 }
