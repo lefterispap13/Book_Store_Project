@@ -1,8 +1,10 @@
 package com.groupproject.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -27,9 +29,10 @@ public class Language implements Serializable {
 
     @ManyToMany(mappedBy="languages")
     @JsonIgnore
-    private Set<Book> book;
+    private Set<Book> books;
 
     public Language(String languageType) {
         this.languageType = languageType;
     }
+
 }

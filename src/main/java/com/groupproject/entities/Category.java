@@ -2,17 +2,13 @@ package com.groupproject.entities;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -31,12 +27,12 @@ public class Category implements Serializable {
     private String type;
 
     @ManyToMany(mappedBy="categories")
-    @JsonIgnore //added for testing
-    private Set<Book> book;
+    @JsonIgnore
+    private Set<Book> books;
 
-    public Category(String type, Set<Book> book) {
+    public Category(String type, Set<Book> books) {
         this.type = type;
-        this.book = book;
+        this.books = books;
     }
 
     public Category(String type) {

@@ -1,14 +1,8 @@
 package com.groupproject.entities;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Objects;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -54,5 +48,20 @@ public class OrderDetails implements Serializable {
         this.originalPrice = originalPrice;
         this.discountRate = discountRate;
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderDetailsId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderDetails that = (OrderDetails) o;
+
+        return orderDetailsId.equals(that.orderDetailsId);
     }
 }

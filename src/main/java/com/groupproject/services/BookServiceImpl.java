@@ -57,11 +57,15 @@ public class BookServiceImpl implements IBookService{
     public void createNewBook(BookRequest request) {
         log.info("Ready to create a new Book");
 
+        log.info("Ready to find the price");
         Long pricingId=request.getPricingId();
         Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
+        log.info("The Price is {}",pricing);
 
+        log.info("Ready to find the publisher");
         Long publisherId= request.getPublisherId();
         Publisher publisher=publisherRepository.findById(publisherId).orElse(null);
+        log.info("The publisher is{}",publisher);
 
         //find the Authors and add them to a list
         List<Long> authorsIds=request.getAuthorIds();
@@ -109,8 +113,9 @@ public class BookServiceImpl implements IBookService{
     public Book updateBook(Long id, BookRequest request) {
         log.info("Ready to create a new Book");
 
-        Long pricingId=request.getPricingId();
-        Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
+        //not needed
+//        Long pricingId=request.getPricingId();
+//        Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
 
         Long publisherId= request.getPublisherId();
         Publisher publisher=publisherRepository.findById(publisherId).orElse(null);
@@ -147,7 +152,7 @@ public class BookServiceImpl implements IBookService{
         existingBook.setDescription(request.getDescription());
         existingBook.setRating(request.getRating());
         existingBook.setIsbn13(request.getIsbn13());
-        existingBook.setPricing(pricing);
+//        existingBook.setPricing(pricing);
         existingBook.setAuthors(authorsSet);
         existingBook.setPublisher(publisher);
         existingBook.setCategories(categorySet);
@@ -160,36 +165,6 @@ public class BookServiceImpl implements IBookService{
 
     }
 
-
-
-//    // update an existing book by id ??
-//    @Override
-//    public BookRequest updateBook(Long id, BookRequest request) {
-//        log.info("Ready to update an existing book");
-//        if (bookRepository.findById(id).isPresent()){
-//            Book existingBook=bookRepository.findById(id).get();
-//            existingBook.setTitle(request.getTitle());
-//            existingBook.setDescription(request.getDescription());
-//            existingBook.setRating(request.getRating());
-//            existingBook.setIsbn13(request.getIsbn13());
-//            existingBook.setPricing(request.getPricing());
-//            existingBook.setAuthors(request.getAuthors());
-//            existingBook.setPublisher(request.getPublisher());
-//            existingBook.setCategories(request.getCategories());
-//            existingBook.setLanguages(request.getLanguages());
-//            existingBook.setOrderDetails(request.getOrderDetails());
-//            Book updatedBook=bookRepository.save(existingBook);
-//            log.info("The updated book is {}",updatedBook);
-//            log.info("The updated Book has been inserted to the DB");
-//            return new BookRequest(updatedBook.getTitle(), updatedBook.getPages(),
-//                    updatedBook.getPublicationDate(), updatedBook.getDescription(),
-//                    updatedBook.getRating(), updatedBook.getIsbn13(), updatedBook.getPublisher(),
-//                    updatedBook.getPricing(), updatedBook.getAuthors(), updatedBook.getCategories(),
-//                    updatedBook.getLanguages(), updatedBook.getOrderDetails());
-//        }
-//        log.info("The account has not been inserted to the DB");
-//        return null;
-//    }
 
     @Override
     public boolean deleteBookById(Long id) {
