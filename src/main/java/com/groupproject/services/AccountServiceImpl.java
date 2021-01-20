@@ -10,6 +10,8 @@ import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.RoleRepository;
 import com.groupproject.requests.AccountRequest;
 import java.util.List;
+
+import com.groupproject.responses.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,12 +46,14 @@ public class AccountServiceImpl implements IAccountService{
 //      Role role = roleRepository.findByTypeIgnoreCase(USER);
         Role role = new Role(2L,"User");
 
-        Account account=new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
+        Account account = new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                 request.getDateOfBirth(), request.getEmail(), request.getGender(), DEFAULT_INITIAL_COINS, role);
-        Account newAccount= accountRepository.save(account);
-        log.info("The new account is {}",newAccount);
+        Account newAccount = accountRepository.save(account);
+        log.info("The new account is {}", newAccount);
         log.info("The account has been inserted to the DB");
         return true;
+
+
     }
 
     @Override
