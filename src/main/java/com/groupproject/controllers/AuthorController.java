@@ -8,6 +8,7 @@ import com.groupproject.responses.Response;
 import com.groupproject.services.AuthorServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import static java.util.Objects.isNull;

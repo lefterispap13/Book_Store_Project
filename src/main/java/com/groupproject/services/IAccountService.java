@@ -2,6 +2,9 @@ package com.groupproject.services;
 
 import com.groupproject.entities.Account;
 import com.groupproject.requests.AccountRequest;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 import java.util.List;
 
 public interface IAccountService {
@@ -23,5 +26,6 @@ public interface IAccountService {
 
     //delete account with id
     boolean deleteById(Long id);
+
 
 }

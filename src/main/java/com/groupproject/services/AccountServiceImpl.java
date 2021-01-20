@@ -11,10 +11,14 @@ import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.RoleRepository;
 import com.groupproject.requests.AccountRequest;
 
-import java.util.List;
+
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,11 +30,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements IAccountService, UserDetailsService {
 
+    ArrayList<GrantedAuthority> authorityList;
+    final SimpleGrantedAuthority AdminAuthority = new SimpleGrantedAuthority("ADMIN");
+    final SimpleGrantedAuthority UserAuthority = new SimpleGrantedAuthority("USER");
     @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleServiceImpl roleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -55,9 +62,8 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
     public boolean createAccount(AccountRequest request) {
         log.info("Ready to insert a new Account . The request is {}", request);
 
-//      Role role = roleRepository.findByTypeIgnoreCase(USER);
-        Role role = new Role(2L, "User");
-
+//        authorityList.add(AdminAuthority);
+        Role role = new Role(2L, "USER");
         Account account = new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                 request.getDateOfBirth(), request.getEmail(), request.getGender(), DEFAULT_INITIAL_COINS, role);
         account.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -83,7 +89,7 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
         existingAccount.setEmail(request.getEmail());
         existingAccount.setGender(request.getGender());
         existingAccount.setCoins(request.getCoins());
-        existingAccount.setRole(request.getRole());
+//        existingAccount.setRole(request.getRole());
         Account updatedAccount = accountRepository.save(existingAccount);
         log.info("The updated account is {}", updatedAccount);
         log.info("The updated account has been inserted to the DB");
@@ -112,7 +118,32 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
         if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+//        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+//        for (Role role  : applicationUser.getRole()) {
+//            grantedAuthorities.add(new SimpleGrantedAuthority(role.getType()));
+//        }
+//        applicationUser.getRole()= new SimpleGrantedAuthority ("USER");
+//        SimpleGrantedAuthority UserAuthority =applicationUser.getRole() ;
+//        authorityList.add(UserAuthority);
+        Role role = applicationUser.getRole();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" +role.getType()));
+        log.info("loadUserByUsername: found match, returning "
+                + applicationUser.getUsername()+authorities.toString()
+                );
+        return new User(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
     }
-
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        Account applicationUser = accountRepository.findByUsername(username);
+//        Role role = user.getRoles();
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//
+//
+//            authorities.add(new SimpleGrantedAuthority(role.getType()));
+//
+//
+//        return authorities;
+//    }
 }

@@ -24,3 +24,5 @@ hs_err_pid*
 target/bookStoreProject-1.0-SNAPSHOT.jar.original
 .idea/jsLibraryMappings.xml
 demo-app/.eslintcache
+target/classes/application.properties
+src/main/resources/application.properties

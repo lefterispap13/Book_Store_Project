@@ -3,9 +3,12 @@ package com.groupproject.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
+import com.groupproject.services.AccountServiceImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.groupproject.constants.SecurityConstants.*;
 
@@ -46,11 +50,20 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         if (token != null) {
             String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
+
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
-
+            System.out.println(user);
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+                    if (user.contains("ROLE_USER")) {
+                        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+                        return new UsernamePasswordAuthenticationToken(user, null, authorities);
+                    }else if((user.contains("ROLE_ADMIN"))){
+                        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                        return new UsernamePasswordAuthenticationToken(user, null, authorities);
+                    }
             }else{
                 return  null;
             }
@@ -59,3 +72,5 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         return null;
     }
 }
+//    UserDetails principal = AccountServiceImpl.loadUserByUsername(username);
+//                return new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
