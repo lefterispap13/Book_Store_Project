@@ -86,6 +86,23 @@ public class AccountServiceImpl implements IAccountService{
 //        log.info("The account does not exists");
 //        return null;
     }
+    @Override
+    public Account updateAccount(Long id, double x) {
+        log.info("Ready to update an existing account");
+        Account existingAccount = accountRepository.findById(id).orElse(null);
+        if (isNull(existingAccount)) {
+            log.info("The account does not exists");
+            return null;
+        }
+        existingAccount.setCoins(x);
+        Account updatedAccount = accountRepository.save(existingAccount);
+        log.info("The updated account is {}", updatedAccount);
+        log.info("The updated account has been inserted to the DB");
+        return updatedAccount;
+//        }
+//        log.info("The account does not exists");
+//        return null;
+    }
 
 
     @Override

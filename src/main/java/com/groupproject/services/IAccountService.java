@@ -17,6 +17,8 @@ public interface IAccountService {
 
     //update account with id
     Account updateAccount(Long id, AccountRequest request);
+    Account updateAccount(Long id,double x);
+
 
 //    //update account's coins
 //    Account updateAccountCoins(Long id, AccountRequest request);

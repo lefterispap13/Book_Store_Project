@@ -61,4 +61,8 @@ public class Order implements Serializable {
         this.orderDetails = orderDetails;
     }
 
+//    public Order(LocalDateTime orderDate, double totalCoins) {
+//        this.orderDate = orderDate;
+//        this.totalCoins = totalCoins;
+//    }
 }

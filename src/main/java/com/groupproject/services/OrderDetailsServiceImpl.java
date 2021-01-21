@@ -33,6 +33,8 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
     @Autowired
     private PricingRepository pricingRepository;
+    @Autowired
+    private OrderServiceImpl orderServiceImpl;
 
     @Override
     public List<OrderDetails> getAll() {
@@ -77,6 +79,10 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
         OrderDetails newOrderDetails = orderDetailsRepository.save(orderDetails);
         log.info("The new orderDetails is {}", newOrderDetails);
         log.info("The orderDetails have been inserted to the DB");
+        log.info("Updating order total coins");
+        // TODO:adding coins to the account-done. is it ok though?
+        order = orderServiceImpl.updateOrder(orderId,totalPrice+order.getTotalCoins());
+        orderRepository.save(order);
         return true;
     }
 
@@ -127,11 +133,16 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
     @Override
     public boolean deleteById(Long id) {
-
         log.info("Ready to delete an orderDetails");
         if (orderDetailsRepository.existsById(id)) {
+            Long orderId= orderDetailsRepository.findById(id).orElse(null).getOrder().getOrderId();
+            Order order=orderRepository.findById(orderId).orElse(null);
+            double totalCoins=orderDetailsRepository.findById(id).orElse(null).getTotalPrice();
             orderDetailsRepository.deleteById(id);
             log.info("orderDetails deleted successfully");
+            log.info("Updating order total coins");
+            order = orderServiceImpl.updateOrder(orderId,order.getTotalCoins()-totalCoins);
+            orderRepository.save(order);
             return true;
         }
         log.info("orderDetails has not deleted successfully");
