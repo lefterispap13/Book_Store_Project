@@ -19,6 +19,9 @@ public interface IBookService {
     //get books by categories
     List<Book> getBookByCategories(String categoryType);
 
+    //get books by authorId
+    List<Book> getBookByAuthorId(Long authorId);
+
     // create new book
     void createNewBook(BookRequest request);
 
