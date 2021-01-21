@@ -23,7 +23,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         super(authManager);
     }
 
-    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -43,6 +43,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken authenticate(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
+
             String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
@@ -50,9 +51,11 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             System.out.println(user);
             if (user != null) {
                 if (user.contains("ROLE_USER")) {
+                    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
                     return new UsernamePasswordAuthenticationToken(user, null, authorities);
-                } else if ((user.contains("ROLE_ADMIN"))) {
+                } else if (user.contains("ROLE_ADMIN")) {
+                    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                     return new UsernamePasswordAuthenticationToken(user, null, authorities);
                 }

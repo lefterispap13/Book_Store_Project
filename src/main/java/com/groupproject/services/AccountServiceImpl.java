@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements IAccountService, UserDetailsService {
 
-    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
     @Autowired
     private AccountRepository accountRepository;
@@ -100,11 +99,14 @@ public class AccountServiceImpl implements IAccountService, UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         Role role = applicationUser.getRole();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getType()));
+        System.out.println(role.getType());
         log.info("loadUserByUsername: found match, returning "
-                + applicationUser.getUsername() + authorities.toString()
+                + applicationUser.getUsername() +" With role " +authorities.toString()
         );
         return new User(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
+
     }
 
 }
