@@ -13,6 +13,15 @@ public interface IBookService {
     //get a book by id
     Book getBookById(Long id);
 
+    //get books by Language
+    List<Book> getBookByLanguages(String languageType);
+
+    //get books by categories
+    List<Book> getBookByCategories(String categoryType);
+
+    //get books by authorId
+    List<Book> getBookByAuthorId(Long authorId);
+
     // create new book
     void createNewBook(BookRequest request);
 
