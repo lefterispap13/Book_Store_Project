@@ -93,7 +93,7 @@ public class OrderServiceImpl implements IOrderService {
             log.info("Order successfully deleted");
             return true;
         }
-        log.info("Order wasn't successfully");
+        log.info("Order wasn't deleted successfully");
         return false;
     }
 }
