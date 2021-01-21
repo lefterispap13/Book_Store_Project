@@ -45,6 +45,18 @@ public class BookServiceImpl implements IBookService{
         return bookRepository.findAll();
     }
 
+    //list of books from languages
+    public List<Book> getBookByLanguages(String languageType){
+        log.info("Ready to find all the books by language");
+        return bookRepository.findByLanguages_LanguageType(languageType);
+    }
+
+    //list of books from categories
+    public List<Book> getBookByCategories(String categoryType){
+        log.info("Ready to find the books by category");
+        return bookRepository.findByCategories_Type((categoryType));
+    }
+
     // get book by id
     @Override
     public Book getBookById(Long id) {
