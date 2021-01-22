@@ -53,7 +53,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public boolean createOrder(OrderRequest request) {
+    public Long createOrder(OrderRequest request) {
 
         //want instead of the whole account to give only accountId
         log.info("Ready to find th account");
@@ -74,7 +74,7 @@ public class OrderServiceImpl implements IOrderService {
         Order newOrder = orderRepository.save(order);
         log.info("The new order is {}", newOrder);
         log.info("The order has been inserted to the DB");
-        return true;
+        return order.getOrderId();
     }
 
     @Override

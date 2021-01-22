@@ -14,9 +14,8 @@ public interface IOrderService {
 
     // find order with account id
     List<Order> getOrdersByAccountId(Long Id);
-
-    // new order
-    boolean createOrder(OrderRequest request);
+    //new order
+    Long createOrder(OrderRequest request);
 
     //update order with id
     Order updateOrder(Long id, OrderRequest request);

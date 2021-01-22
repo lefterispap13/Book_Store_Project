@@ -54,11 +54,11 @@ public class OrderController {
     //create new order
     @PostMapping(value = "/new", consumes = "application/json",
             produces = "application/json")
-    public Response createNewOrder(@RequestBody OrderRequest request) {
+    public OrderResponse createNewOrder(@RequestBody OrderRequest request) {
 
         log.info("Ready to create a new Order");
-        orderServiceImpl.createOrder(request);
-        return new Response("The order has been saved");
+        Long x=orderServiceImpl.createOrder(request);
+        return new OrderResponse("The order has been saved",x);
     }
 
     // update order with id
