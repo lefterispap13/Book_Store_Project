@@ -36,7 +36,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public List<Order> getAll() {
-
+        log.info("Ready to find all the orders");
         return orderRepository.findAll();
     }
 
@@ -60,14 +60,6 @@ public class OrderServiceImpl implements IOrderService {
         Long accountId= request.getAccountId();
         Account account=accountRepository.findById(accountId).orElse(null);
 
-//        //want instead of the whole orderDetails to give only a list of orderDetailsIds
-//        List<Long> orderDetailsIds= request.getOrderDetailsIds();
-//        Set<OrderDetails> orderDetailsSet=new HashSet<>();
-//        for (Long current: orderDetailsIds){
-//            OrderDetails orderDetails=orderDetailsRepository.findById(current).orElse(null);
-//            log.info("Ready to add all the order details");
-//            orderDetailsSet.add(orderDetails);
-//        }
         log.info("Ready to insert a new Order");
         LocalDateTime now = LocalDateTime.now();
         Order order = new Order(now, account,0); //request.getTotalCoins());//probably 0 coins here
