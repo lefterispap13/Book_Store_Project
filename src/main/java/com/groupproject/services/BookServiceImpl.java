@@ -7,7 +7,6 @@ import com.groupproject.requests.BookRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -73,49 +72,49 @@ public class BookServiceImpl implements IBookService{
     // create a new book ??
     @Override
     public void createNewBook(BookRequest request) {
-        log.info("Ready to create a new Book");
+            log.info("Ready to create a new Book");
 
-        log.info("Ready to find the price");
-        Long pricingId=request.getPricingId();
-        Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
-        log.info("The Price is {}",pricing);
+            log.info("Ready to find the price");
+            Long pricingId = request.getPricingId();
+            Pricing pricing = pricingRepository.findById(pricingId).orElse(null);
+            log.info("The Price is {}", pricing);
 
-        log.info("Ready to find the publisher");
-        Long publisherId= request.getPublisherId();
-        Publisher publisher=publisherRepository.findById(publisherId).orElse(null);
-        log.info("The publisher is{}",publisher);
+            log.info("Ready to find the publisher");
+            Long publisherId = request.getPublisherId();
+            Publisher publisher = publisherRepository.findById(publisherId).orElse(null);
+            log.info("The publisher is{}", publisher);
 
-        //find the Authors and add them to a list
-        List<Long> authorsIds=request.getAuthorIds();
-        Set<Author> authorsSet=new HashSet<>();
-        for (Long current:authorsIds){
-            Author author=authorRepository.findById(current).orElse(null);
-            log.info("The author is {}",author);
-            authorsSet.add(author);
-        }
-        //find the Categories and them to a list
-        List<Long> categoriesIds=request.getCategoryIds();
-        Set<Category> categorySet=new HashSet<>();
-        for (Long current:categoriesIds){
-            Category category=categoryRepository.findById(current).orElse(null);
-            log.info("The category is {}",category);
-            categorySet.add(category);
-        }
-        //find the Languages and add them to a list
-        List<Long> languagesIds=request.getLanguageIds();
-        Set<Language> languageSet=new HashSet<>();
-        for (Long current:languagesIds){
-            Language language=languageRepository.findById(current).orElse(null);
-            log.info("The language is {}",language);
-            languageSet.add(language);
-        }
+            //find the Authors and add them to a list
+            List<Long> authorsIds = request.getAuthorIds();
+            Set<Author> authorsSet = new HashSet<>();
+            for (Long current : authorsIds) {
+                Author author = authorRepository.findById(current).orElse(null);
+                log.info("The author is {}", author);
+                authorsSet.add(author);
+            }
+            //find the Categories and them to a list
+            List<Long> categoriesIds = request.getCategoryIds();
+            Set<Category> categorySet = new HashSet<>();
+            for (Long current : categoriesIds) {
+                Category category = categoryRepository.findById(current).orElse(null);
+                log.info("The category is {}", category);
+                categorySet.add(category);
+            }
+            //find the Languages and add them to a list
+            List<Long> languagesIds = request.getLanguageIds();
+            Set<Language> languageSet = new HashSet<>();
+            for (Long current : languagesIds) {
+                Language language = languageRepository.findById(current).orElse(null);
+                log.info("The language is {}", language);
+                languageSet.add(language);
+            }
 
-        log.info("Ready to save the new Book");
-        Book book=new Book(request.getTitle(), request.getPages(),
-                request.getPublicationDate(),request.getDescription(), request.getRating(),
-                request.getIsbn13(),pricing,authorsSet,publisher,categorySet,languageSet);
-        bookRepository.save(book);
-        log.info("The book has been saved successfully");
+            log.info("Ready to save the new Book");
+            Book book = new Book(request.getTitle(), request.getPages(),
+                    request.getPublicationDate(), request.getDescription(), request.getRating(),
+                    request.getIsbn13(), pricing, authorsSet, publisher, categorySet, languageSet);
+            bookRepository.save(book);
+            log.info("The book has been saved successfully");
     }
 
     //update

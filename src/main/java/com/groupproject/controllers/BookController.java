@@ -81,6 +81,7 @@ public class BookController {
         log.info("Ready to create a new book");
         bookService.createNewBook(request);
         return new Response("The Book has been saved");
+
     }
 
     // update a book with ID with put method
