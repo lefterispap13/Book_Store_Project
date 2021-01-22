@@ -40,6 +40,13 @@ public class AccountServiceImpl implements IAccountService{
     }
 
     @Override
+    public Long getAccountByUsername(String username) {
+        log.info("Ready to find an account from the username");
+        log.info("Getting the account id from this account");
+        return accountRepository.findByUsername(username).getAccountId();
+    }
+
+    @Override
     public boolean createAccount(AccountRequest request) {
         log.info("Ready to insert a new Account . The request is {}",request);
 

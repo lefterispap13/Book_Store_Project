@@ -37,8 +37,14 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order getOrderById(Long id) {
-
+        log.info("Ready to find order by id");
         return orderRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Order> getOrdersByAccountId(Long accountId) {
+        log.info("Ready to find Order by account id {}",accountId);
+        return orderRepository.findOrderByAccount_AccountId(accountId);
     }
 
     @Override

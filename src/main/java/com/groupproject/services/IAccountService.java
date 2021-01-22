@@ -12,6 +12,9 @@ public interface IAccountService {
     //account with id
     Account getAccountById(Long id);
 
+    //find account by username
+    Long getAccountByUsername(String username);
+
     //new account
     boolean createAccount(AccountRequest request);
 
