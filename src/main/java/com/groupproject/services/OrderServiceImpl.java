@@ -77,24 +77,6 @@ public class OrderServiceImpl implements IOrderService {
         return true;
     }
 
-//    @Override
-//    public OrderRequest updateOrder(Long id, OrderRequest request) {
-//
-//        log.info("Ready to update the given order");
-//        if (orderRepository.findById(id).isPresent()) {
-//            Order existingOrder = orderRepository.findById(id).get();
-//            existingOrder.setOrderDate(request.getOrderDate());//is it ok to update the order date time?
-//            existingOrder.setOrderDetails(request.getOrderDetails());
-//            existingOrder.setTotalCoins(request.getTotalCoins());
-//            Order updatedOrder = orderRepository.save(existingOrder);
-//            log.info("The updated order is {}", updatedOrder);
-//            log.info("The updated order has been inserted to the DB");
-//            return new OrderRequest(updatedOrder.getOrderDate(), updatedOrder.getAccount(), updatedOrder.getTotalCoins(), updatedOrder.getOrderDetails());
-//        }
-//        log.info("The order didn't get updated");
-//        return null;
-//    }
-
     @Override
     public Order updateOrder(Long id, OrderRequest request) {
         log.info("Ready to update an Order ");
