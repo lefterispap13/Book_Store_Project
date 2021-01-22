@@ -19,4 +19,8 @@ public class OrderRequest {
     private double totalCoins;
 //    private Set<OrderDetails> orderDetails;
 //    private List<Long> orderDetailsIds;
+
+//    public OrderRequest(double totalCoins) {
+//        this.totalCoins = totalCoins;
+//    }
 }

@@ -1,5 +1,6 @@
 package com.groupproject.controllers;
 
+import com.groupproject.entities.Order;
 import com.groupproject.requests.OrderRequest;
 import com.groupproject.responses.OrderResponse;
 import com.groupproject.responses.Response;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import static java.util.Objects.isNull;
 
+
+import static java.util.Objects.isNull;
 
 @Slf4j
 @CrossOrigin(origins = " * ", allowedHeaders = " * ")
@@ -58,14 +61,17 @@ public class OrderController {
         return new Response("The order has been saved");
     }
 
-//    // update order with id
-//    @PutMapping(value="/update/{id}",consumes = "application/json", produces = "application/json")
-//    public Response updateExistingOrder(@PathVariable(value = "id") Long id,
-//                                          @RequestBody OrderRequest request){
-//        log.info("ready to update an order");
-//        orderServiceImpl.updateOrder(id,request);
-//        return new Response("The order has been updated");
-//    }
+    // update order with id
+    @PutMapping(value="/update/{id}",consumes = "application/json", produces = "application/json")
+    public Response updateExistingOrder(@PathVariable(value = "id") Long id,
+                                          @RequestBody OrderRequest request){
+        log.info("ready to update an order");
+        Order order=orderServiceImpl.updateOrder(id,request);
+        if (isNull(order)) {
+            return new Response("There is no such order");
+        }
+        return new Response("The order has been updated");
+    }
 
     // delete order by id
     @DeleteMapping("/delete/{id}")
