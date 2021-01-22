@@ -46,6 +46,11 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
         return orderDetailsRepository.findById(id).orElse(null);
     }
 
+    public List<OrderDetails> getOrderDetailsByOrderId(Long orderId){
+        log.info("Ready to get all the Order Details with the orderId {}",orderId);
+        return orderDetailsRepository.findByOrder_OrderId(orderId);
+    }
+
     @Override
     public boolean createOrderDetails(OrderDetailsRequest request) {
 

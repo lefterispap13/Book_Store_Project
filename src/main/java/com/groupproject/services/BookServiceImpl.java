@@ -109,14 +109,6 @@ public class BookServiceImpl implements IBookService{
             log.info("The language is {}",language);
             languageSet.add(language);
         }
-//        //find the OrderDetails and them to a list
-//        List<Long> orderDetailsIds=request.getOrderDetailsIds();
-//        Set<OrderDetails> orderDetailsSet=new HashSet<>();
-//        for (Long current:orderDetailsIds){
-//            OrderDetails orderDetails=orderDetailsRepository.findById(current).orElse(null);
-//            log.info("The Order Details is {}",orderDetails);
-//            orderDetailsSet.add(orderDetails);
-//        }
 
         log.info("Ready to save the new Book");
         Book book=new Book(request.getTitle(), request.getPages(),
@@ -130,11 +122,6 @@ public class BookServiceImpl implements IBookService{
     @Override
     public Book updateBook(Long id, BookRequest request) {
         log.info("Ready to create a new Book");
-
-        //not needed
-//        Long pricingId=request.getPricingId();
-//        Pricing pricing=pricingRepository.findById(pricingId).orElse(null);
-
         Long publisherId= request.getPublisherId();
         Publisher publisher=publisherRepository.findById(publisherId).orElse(null);
 
@@ -162,7 +149,6 @@ public class BookServiceImpl implements IBookService{
             log.info("The language is {}",language);
             languageSet.add(language);
         }
-
         Book existingBook=bookRepository.findById(id).orElse(null);
         existingBook.setTitle(request.getTitle());
         existingBook.setPages(request.getPages());
@@ -178,9 +164,7 @@ public class BookServiceImpl implements IBookService{
         Book updatedBook=bookRepository.save(existingBook);
         log.info("The updated book is {}",updatedBook);
         log.info("The updated Book has been inserted to the DB");
-
         return updatedBook;
-
     }
 
 

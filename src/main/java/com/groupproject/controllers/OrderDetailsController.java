@@ -28,9 +28,20 @@ public class OrderDetailsController {
     // get OrderDetails by id
     @GetMapping(value = "/getbyid/{id}")
     public OrderDetailsResponse getById(@PathVariable Long id) {
-
         log.info("Ready to find order details by id");
         return new OrderDetailsResponse("Found the OrderDetails", orderDetailsServiceImpl.getOrderDetailsById(id));
+    }
+
+    // get OrderDetails by OrderId
+    @GetMapping(value="/getbyorderid/{orderId}",produces="application/json")
+    public OrderDetailsResponse getByOrderId(@PathVariable Long orderId) {
+        if (orderDetailsServiceImpl.getOrderDetailsByOrderId(orderId).size() == 0) {
+            log.info("No order details with the given order id {} found", orderId);
+            return new OrderDetailsResponse("No order details with the given order id found", orderDetailsServiceImpl.getOrderDetailsByOrderId(orderId));
+        } else {
+            log.info("Ready to find order details by orderId {}", orderId);
+            return new OrderDetailsResponse("Found the Order details", orderDetailsServiceImpl.getOrderDetailsByOrderId(orderId));
+        }
     }
 
     //create new OrderDetails
