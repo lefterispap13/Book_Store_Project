@@ -13,7 +13,7 @@ public interface IOrderService {
     Order getOrderById(Long id);
 
     //new order
-    boolean createOrder(OrderRequest request);
+    Long createOrder(OrderRequest request);
 
     //update order with id
     Order updateOrder(Long id, OrderRequest request);
