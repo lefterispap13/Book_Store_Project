@@ -19,10 +19,16 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-target/bookStoreProject-1.0-SNAPSHOT.jar.original
-.idea/jsLibraryMappings.xml
-demo-app/.eslintcache
-target/classes/application.properties
-src/main/resources/application.properties
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/

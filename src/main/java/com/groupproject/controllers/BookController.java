@@ -7,12 +7,15 @@ import com.groupproject.responses.Response;
 import com.groupproject.services.BookServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import static java.util.Objects.isNull;
+
 @Slf4j
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 @RestController
 @RequestMapping(value="/api/book")
-@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class BookController {
 
     @Autowired
@@ -23,6 +26,45 @@ public class BookController {
     public BookResponse getAllBooks(){
         log.info("Ready to find all the books");
         return new BookResponse("Found all the books",bookService.getAll());
+    }
+
+    // list of all the books by language
+    @GetMapping(value = "/getbylanguage/{languageType}",produces="application/json")
+    public BookResponse getAllBooksByLanguage(@PathVariable String languageType){
+        log.info("Ready to find all the books by language {}", languageType);
+        if(bookService.getBookByLanguages(languageType).size()==0){
+            log.info("No matched books with the given language");
+            return new BookResponse("There are no books with this language",bookService.getBookByLanguages(languageType));
+        } else {
+            log.info("Found all the books with this language");
+            return new BookResponse("Found all the books", bookService.getBookByLanguages(languageType));
+        }
+    }
+
+    // list of all the books by category
+    @GetMapping(value = "/getbycategory/{categoryType}",produces="application/json")
+    public BookResponse getAllBooksByCategory(@PathVariable String categoryType){
+        log.info("Ready to find all the books by category {}", categoryType);
+        if(bookService.getBookByCategories(categoryType).size()==0){
+            log.info("No matched books with the given category");
+            return new BookResponse("There are no books with this category",bookService.getBookByCategories(categoryType));
+        } else {
+            log.info("Found all the books with this category");
+            return new BookResponse("Found all the books", bookService.getBookByCategories(categoryType));
+        }
+    }
+
+    // list of all the books by authorId
+    @GetMapping(value = "/getbyauthor/{authorId}",produces="application/json")
+    public BookResponse getAllBooksByAuthor(@PathVariable Long authorId){
+        log.info("Ready to find all the books by authorId {}", authorId);
+        if(bookService.getBookByAuthorId(authorId).size()==0){
+            log.info("No matched books with the given author id {}",authorId);
+            return new BookResponse("There are no books with this author id",bookService.getBookByAuthorId(authorId));
+        } else {
+            log.info("Found all the books with the given author id {}",authorId);
+            return new BookResponse("Found all the books", bookService.getBookByAuthorId(authorId));
+        }
     }
 
     // get book by id
@@ -39,6 +81,7 @@ public class BookController {
         log.info("Ready to create a new book");
         bookService.createNewBook(request);
         return new Response("The Book has been saved");
+
     }
 
     // update a book with ID with put method

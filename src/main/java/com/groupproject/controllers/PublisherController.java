@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import static java.util.Objects.isNull;
 
 @Slf4j
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 @RestController
 @RequestMapping(value ="/api/publisher")
-@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class PublisherController {
 
     @Autowired

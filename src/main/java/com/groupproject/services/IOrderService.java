@@ -12,11 +12,17 @@ public interface IOrderService {
     // find order with id
     Order getOrderById(Long id);
 
-    //new order
+    // find order with account id
+    List<Order> getOrdersByAccountId(Long Id);
+
+    // new order
     boolean createOrder(OrderRequest request);
 
-//    //update order with id
-//    OrderRequest updateOrder(Long id, OrderRequest request);
+    //update order with id
+    Order updateOrder(Long id, OrderRequest request);
+
+    //update order after new order details
+    Order updateOrder(Long id, double totalCoins);
 
     //delete order with id
     boolean deleteById(Long id);

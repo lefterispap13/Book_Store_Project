@@ -16,6 +16,8 @@ public interface ILanguageService {
     // new language
     void newLanguage(LanguageRequest request);
 
+    // update language
+    Language updateLanguage(Long id, LanguageRequest request);
 
     // delete language(by id)
     boolean deleteLanguage(Long id);

@@ -6,13 +6,12 @@ import com.groupproject.responses.Response;
 import com.groupproject.services.PricingServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 @RestController
 @RequestMapping(value="/api/pricing")
-@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class PricingController {
 
     @Autowired

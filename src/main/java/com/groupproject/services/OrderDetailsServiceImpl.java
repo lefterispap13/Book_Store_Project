@@ -9,6 +9,8 @@ import com.groupproject.repository.OrderDetailsRepository;
 import com.groupproject.repository.OrderRepository;
 import com.groupproject.repository.PricingRepository;
 import com.groupproject.requests.OrderDetailsRequest;
+
+import java.util.Date;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
     @Autowired
     private PricingRepository pricingRepository;
+    @Autowired
+    private OrderServiceImpl orderServiceImpl;
 
     @Override
     public List<OrderDetails> getAll() {
@@ -46,6 +50,11 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
         return orderDetailsRepository.findById(id).orElse(null);
     }
 
+    public List<OrderDetails> getOrderDetailsByOrderId(Long orderId){
+        log.info("Ready to get all the Order Details with the orderId {}",orderId);
+        return orderDetailsRepository.findByOrder_OrderId(orderId);
+    }
+
     @Override
     public boolean createOrderDetails(OrderDetailsRequest request) {
 
@@ -56,10 +65,17 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
         //i want to do originalPrice = startingPrice from pricing
         double originalPrice = book.getPricing().getStartingPrice();
-
+//        Date dateNow=new Date();
+//        double discountRate = 0;
+//        if (book.getPricing().getEndingDate()!=null
+//                && book.getPricing().getStartingDate()!=null
+//                &&dateNow.after(book.getPricing().getStartingDate())
+//                &&dateNow.before(book.getPricing().getEndingDate())) {
+//            //i want to do discountRate = discount from pricing
+//             discountRate = book.getPricing().getDiscount();
+//        }
         //i want to do discountRate = discount from pricing
         double discountRate = book.getPricing().getDiscount();
-
         //i want to do totalPrice = originalPrice - (originalPrice * discountRate)
         double totalPrice = originalPrice - ( originalPrice * discountRate);
 
@@ -68,6 +84,10 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
         OrderDetails newOrderDetails = orderDetailsRepository.save(orderDetails);
         log.info("The new orderDetails is {}", newOrderDetails);
         log.info("The orderDetails have been inserted to the DB");
+        log.info("Updating order total coins");
+        // TODO:adding coins to the account-done. is it ok though?
+        order = orderServiceImpl.updateOrder(orderId,totalPrice+order.getTotalCoins());
+        orderRepository.save(order);
         return true;
     }
 
@@ -118,11 +138,16 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
     @Override
     public boolean deleteById(Long id) {
-
         log.info("Ready to delete an orderDetails");
         if (orderDetailsRepository.existsById(id)) {
+            Long orderId= orderDetailsRepository.findById(id).orElse(null).getOrder().getOrderId();
+            Order order=orderRepository.findById(orderId).orElse(null);
+            double totalCoins=orderDetailsRepository.findById(id).orElse(null).getTotalPrice();
             orderDetailsRepository.deleteById(id);
             log.info("orderDetails deleted successfully");
+            log.info("Updating order total coins");
+            order = orderServiceImpl.updateOrder(orderId,order.getTotalCoins()-totalCoins);
+            orderRepository.save(order);
             return true;
         }
         log.info("orderDetails has not deleted successfully");

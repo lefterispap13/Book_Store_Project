@@ -12,6 +12,7 @@ public class AccountResponse extends Response{
 
     private List<Account> accounts;
     private Account account;
+    private Long accountId;
 
     public AccountResponse(String msg, List<Account> accounts){
         super(msg);
@@ -23,4 +24,8 @@ public class AccountResponse extends Response{
         this.account=account;
     }
 
+    public AccountResponse(String msg, Long accountId) {
+        super(msg);
+        this.accountId = accountId;
+    }
 }

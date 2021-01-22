@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import static java.util.Objects.isNull;
 
 @Slf4j
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 @RestController
 @RequestMapping(value="/api/role")
-@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class RoleController {
     @Autowired
     private RoleServiceImpl roleService;

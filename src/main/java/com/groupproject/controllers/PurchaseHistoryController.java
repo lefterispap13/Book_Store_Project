@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import static java.util.Objects.isNull;
 
 @Slf4j
+@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 @RestController
 @RequestMapping(value="/api/purchasehistory")
-@CrossOrigin(origins = " * ", allowedHeaders = " * ")
 public class PurchaseHistoryController {
 
     @Autowired

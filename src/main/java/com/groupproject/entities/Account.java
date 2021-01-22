@@ -2,7 +2,6 @@ package com.groupproject.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "accounts")
@@ -32,7 +32,7 @@ public class Account implements Serializable {
     @Column(name = "account_id")
     private Long accountId;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false,unique = true)
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -56,14 +56,21 @@ public class Account implements Serializable {
     @Column(name = "coins")
     private double coins;
 
+//    @OneToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name="role_id",referencedColumnName = "role_id")
+//    private Role role;
+
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private Set<Order> orders;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<PurchaseHistory> purchaseHistorySet;
