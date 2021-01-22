@@ -1,6 +1,7 @@
 package com.groupproject.controllers;
 
 
+import com.groupproject.entities.Language;
 import com.groupproject.requests.LanguageRequest;
 import com.groupproject.responses.LanguageResponse;
 import com.groupproject.responses.Response;
@@ -45,6 +46,17 @@ public class LanguageController {
         log.info("Ready to create a new language");
         languageService.newLanguage(request);
         return new Response("The language has been saved");
+    }
+
+    @PutMapping(value="/update/{id}",consumes = "application/json", produces = "application/json")
+    public Response updateExistingLanguage(@PathVariable(value = "id") Long id,
+                                                  @RequestBody LanguageRequest request){
+        log.info("ready to update a Language");
+        Language language = languageService.updateLanguage(id, request);
+        if (isNull(language)) {
+            return new Response("There is no such Language");
+        }
+        return new Response("The Language has been updated");
     }
 
     // delete a language -- DELETE method
