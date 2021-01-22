@@ -12,6 +12,9 @@ public interface IOrderDetailsService {
     // find orderDetails with id
     OrderDetails getOrderDetailsById(Long id);
 
+    // find orderDetails by OrderId
+    List<OrderDetails> getOrderDetailsByOrderId(Long orderId);
+
     //new order
     boolean createOrderDetails(OrderDetailsRequest request);
 
