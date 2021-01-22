@@ -7,6 +7,8 @@ import com.groupproject.services.OrderServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import static java.util.Objects.isNull;
+
 
 @Slf4j
 @CrossOrigin(origins = " * ", allowedHeaders = " * ")
@@ -31,6 +33,19 @@ public class OrderController {
 
         log.info("Ready to find order by id");
         return new OrderResponse("Found the asked order", orderServiceImpl.getOrderById(id));
+    }
+
+    // get order by account id
+    @GetMapping(value = "/getbyaccountid/{accountId}",produces="application/json")
+    public OrderResponse getOrderByAccountId(@PathVariable Long accountId){
+        log.info("Ready to find order by account id {}",accountId);
+        if (isNull(orderServiceImpl.getOrdersByAccountId(accountId))){
+            log.info("There is no order with this accountId");
+            return new OrderResponse("There is no order with this accountId",orderServiceImpl.getOrdersByAccountId(accountId));
+        }else{
+            log.info("Found the orders with accountId {}",accountId);
+            return new OrderResponse("Found the Order", orderServiceImpl.getOrdersByAccountId(accountId));
+        }
     }
 
     //create new order

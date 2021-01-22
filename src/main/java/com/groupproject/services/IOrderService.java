@@ -12,7 +12,10 @@ public interface IOrderService {
     // find order with id
     Order getOrderById(Long id);
 
-    //new order
+    // find order with account id
+    List<Order> getOrdersByAccountId(Long Id);
+
+    // new order
     boolean createOrder(OrderRequest request);
 
 //    //update order with id
