@@ -1,6 +1,7 @@
 package com.groupproject.controllers;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.groupproject.requests.BookRequest;
 import com.groupproject.responses.BookResponse;
 import com.groupproject.responses.Response;
@@ -38,6 +39,19 @@ public class BookController {
         } else {
             log.info("Found all the books with this language");
             return new BookResponse("Found all the books", bookService.getBookByLanguages(languageType));
+        }
+    }
+
+    //list of all the books by orderId --testing
+    @GetMapping(value="/getbyorderid/{orderId}",produces="application/json")
+    public BookResponse getAllBooksByOrderId(@PathVariable Long orderId){
+        log.info("Ready to find all the books by order with id {}",orderId);
+        if(bookService.getBooksByOrderId(orderId).size()==0){
+            log.info("No matched books with the given order id");
+            return new BookResponse("No matched books with the given order id",bookService.getBooksByOrderId(orderId));
+        } else {
+            log.info("Found all the books with this order id {}",orderId);
+            return new BookResponse("Found all the books with this order id",bookService.getBooksByOrderId(orderId));
         }
     }
 
@@ -84,7 +98,13 @@ public class BookController {
     @GetMapping(value="/getbyid/{id}")
     public BookResponse getById(@PathVariable Long id){
         log.info("Ready to find the book with the id {}",id);
-        return new BookResponse("Found the book", bookService.getBookById(id));
+        if (isNull(bookService.getBookById(id))){
+            log.info("There is no book with id {}",id);
+            return new BookResponse("There is no book with this id", bookService.getBookById(id));
+        }else {
+            log.info("Found the book with id {}",id);
+            return new BookResponse("Found the book", bookService.getBookById(id));
+        }
     }
 
     // create a new book with post method
