@@ -1,8 +1,9 @@
 package com.groupproject.security;
 
+import com.auth0.jwt.JWT;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupproject.entities.Account;
-import com.auth0.jwt.JWT;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,15 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.groupproject.constants.SecurityConstants.*;
 
-public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
@@ -32,10 +34,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            Account applicationUser = new ObjectMapper().readValue(req.getInputStream(), Account.class);
+            Account creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), Account.class);
+
             return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(applicationUser.getUsername(),
-                            applicationUser.getPassword(), new ArrayList<>())
+                    new UsernamePasswordAuthenticationToken(
+                            creds.getUsername(),
+                            creds.getPassword(),
+                            new ArrayList<>())
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -49,17 +55,15 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             Authentication auth) throws IOException, ServletException {
 
         String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withSubject(String.valueOf(((User) auth.getPrincipal()).getAuthorities()))
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
+//        res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         PrintWriter out = res.getWriter();
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");
         out.print(token);
         out.flush();
         System.out.println(token);
-
     }
-
 }

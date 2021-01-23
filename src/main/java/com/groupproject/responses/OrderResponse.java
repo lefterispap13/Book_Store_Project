@@ -12,6 +12,7 @@ public class OrderResponse extends Response {
 
     private List<Order> orders;
     private Order order;
+    private Long orderId;
 
     public OrderResponse(String msg, List<Order> orders) {
 
@@ -23,5 +24,9 @@ public class OrderResponse extends Response {
 
         super(msg);
         this.order = order;
+    }
+    public OrderResponse(String msg,Long orderId){
+        super(msg);
+        this.orderId=orderId;
     }
 }

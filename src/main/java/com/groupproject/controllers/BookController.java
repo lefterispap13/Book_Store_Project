@@ -54,6 +54,19 @@ public class BookController {
         }
     }
 
+    //list of all books by accountId --testing
+    @GetMapping(value = "/getbyaccountid/{accountId}",produces="application/json")
+    public BookResponse getAllBooksByAccountId(@PathVariable Long accountId){
+        log.info("Ready to find all the books by account with id {}",accountId);
+        if(bookService.getBooksByAccountId(accountId).size()==0){
+            log.info("Couldn't find any book with this account id {}",accountId);
+            return new BookResponse("Couldn't find any book with this account id",bookService.getBooksByAccountId(accountId));
+        }else{
+            log.info("Found all the books connected to this account id");
+            return new BookResponse("Found all the books", bookService.getBooksByAccountId(accountId));
+        }
+    }
+
     // list of all the books by authorId
     @GetMapping(value = "/getbyauthor/{authorId}",produces="application/json")
     public BookResponse getAllBooksByAuthor(@PathVariable Long authorId){
