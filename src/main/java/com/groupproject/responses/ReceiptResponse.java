@@ -1,6 +1,6 @@
 package com.groupproject.responses;
 
-import com.groupproject.receips.Receipt;
+import com.groupproject.receipts.Receipt;
 import lombok.Data;
 
 @Data

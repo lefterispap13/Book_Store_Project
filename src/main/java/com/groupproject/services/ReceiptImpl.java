@@ -1,9 +1,8 @@
 package com.groupproject.services;
 
-import com.groupproject.entities.Account;
 import com.groupproject.entities.Order;
 import com.groupproject.entities.OrderDetails;
-import com.groupproject.receips.Receipt;
+import com.groupproject.receipts.Receipt;
 import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.OrderDetailsRepository;
 import com.groupproject.repository.OrderRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
