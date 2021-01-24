@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+import static java.util.Objects.isNull;
+
+
 @Slf4j
+@Service
 public class AuthorServiceImpl implements IAuthorService{
 
     @Autowired
@@ -38,6 +41,24 @@ public class AuthorServiceImpl implements IAuthorService{
         log.info("The author has been inserted to the DB");
         return true;
     }
+
+    @Override
+    public Author updateAuthor(Long id, AuthorRequest request) {
+        log.info("Ready to update an existing author");
+        Author existingAuthor = authorRepository.findById(id).orElse(null);
+        if (isNull(existingAuthor)) {
+            log.info("The author does not exists");
+            return null;
+        }
+        existingAuthor.setFirstName(request.getFirstName());
+        existingAuthor.setLastName(request.getLastName());
+        existingAuthor.setCountry(request.getCountry());
+        Author updatedAuthor= authorRepository.save(existingAuthor);
+        log.info("The updated author is {}", updatedAuthor);
+        log.info("The updated author has been inserted to the DB");
+        return updatedAuthor;
+    }
+
     //???
     @Override
     public boolean deleteAuthor(Long id) {

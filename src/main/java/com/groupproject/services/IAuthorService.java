@@ -14,6 +14,7 @@ public interface IAuthorService {
     // create new author
     boolean newAuthor(AuthorRequest request);
     // delete author by id
+    Author updateAuthor(Long id,AuthorRequest request);
     boolean deleteAuthor(Long id);
     // update an existing author(i dont think is needed)
 }

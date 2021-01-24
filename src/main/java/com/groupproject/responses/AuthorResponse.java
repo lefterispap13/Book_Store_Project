@@ -1,12 +1,12 @@
 package com.groupproject.responses;
 
-import com.groupproject.entities.Account;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.groupproject.entities.Author;
+import java.util.List;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AuthorResponse extends Response{
 
     private List<Author> authors;

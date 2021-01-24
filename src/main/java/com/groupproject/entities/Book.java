@@ -2,22 +2,17 @@ package com.groupproject.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
 @Table(name="books")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,46 +38,109 @@ public class Book {
     private String isbn13;
 
     //book_pricing_id(fk)
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id")
-    @JsonIgnore
+    @JoinColumn(name="pricing_id",referencedColumnName = "pricing_id",unique = true)
     private Pricing pricing;
 
     //author_id(fk)
+    //@JsonIgnore
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    @JsonIgnore
     private Set<Author> authors;
 
     //publisher_id(fk) ??
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="publisher_id",nullable=false)
-    @JsonIgnore
     private Publisher publisher;
 
     //categories_id(fk)
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @JsonIgnore
     private Set<Category> categories;
 
     //languages_id(fk)
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id"))
-    @JsonIgnore
     private Set<Language> languages;
 
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
+    public Book(String title, String pages, Date publicationDate, String description,
+                double rating, String isbn13, Pricing pricing, Set<Author> authors,
+                Publisher publisher, Set<Category> categories, Set<Language> languages) {
+        this.title = title;
+        this.pages = pages;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.rating = rating;
+        this.isbn13 = isbn13;
+        this.pricing = pricing;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.categories = categories;
+        this.languages = languages;
+    }
 
+    //testing
+    public Book(String title, String pages, Date publicationDate, String description, double rating, String isbn13, Set<Author> authors, Publisher publisher, Set<Category> categories, Set<Language> languages, Set<OrderDetails> orderDetails) {
+        this.title = title;
+        this.pages = pages;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.rating = rating;
+        this.isbn13 = isbn13;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.categories = categories;
+        this.languages = languages;
+        this.orderDetails = orderDetails;
+    }
 
+    public Book(String title, String pages, Date publicationDate, String description,
+                double rating, String isbn13, Pricing pricing, Publisher publisher) {
+        this.title = title;
+        this.pages = pages;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.rating = rating;
+        this.isbn13 = isbn13;
+        this.pricing = pricing;
+        this.publisher = publisher;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hashCode(bookId);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Book other = (Book) obj;
+        return Objects.equals(bookId, other.bookId);
+    }
 }

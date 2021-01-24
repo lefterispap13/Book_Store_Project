@@ -1,7 +1,10 @@
 package com.groupproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,5 +27,11 @@ public class Language {
     private String languageType;
 
     @ManyToMany(mappedBy="languages")
-    private Set<Book> book;
+    @JsonIgnore
+    private Set<Book> books;
+
+    public Language(String languageType) {
+        this.languageType = languageType;
+    }
+
 }

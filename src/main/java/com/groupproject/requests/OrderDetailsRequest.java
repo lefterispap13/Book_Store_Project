@@ -6,11 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetailsRequest {
-    private Order order;
-    private Book book;
-    private double priceAfterDiscount;
+
+    private Long orderId;
+    private Long bookId;
+    private double originalPrice;
+    private double discountRate;
+    private double totalPrice;
 }

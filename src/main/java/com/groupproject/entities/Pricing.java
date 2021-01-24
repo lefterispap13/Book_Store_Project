@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="pricing")
@@ -35,5 +36,25 @@ public class Pricing {
     @OneToOne(mappedBy = "pricing")
     private Book book;
 
+    public Pricing(double startingPrice, double discount, Date startingDate, Date endingDate) {
+        this.startingPrice = startingPrice;
+        this.discount = discount;
+        this.startingDate = startingDate;
+        this.endingDate = endingDate;
+    }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Pricing pricing = (Pricing) o;
+//
+//        return pricingId.equals(pricing.pricingId);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return pricingId.hashCode();
+//    }
 }
