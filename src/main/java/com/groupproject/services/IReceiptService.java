@@ -1,6 +1,6 @@
 package com.groupproject.services;
 
-import com.groupproject.receips.Receipt;
+import com.groupproject.receipts.Receipt;
 
 public interface IReceiptService {
 

@@ -1,13 +1,9 @@
-package com.groupproject.receips;
+package com.groupproject.receipts;
 
-import com.groupproject.entities.Order;
-import com.groupproject.entities.OrderDetails;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Data
