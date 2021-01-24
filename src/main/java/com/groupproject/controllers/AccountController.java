@@ -56,6 +56,7 @@ public class AccountController {
 
         log.info("Ready to create a new Account");
         accountServiceImpl.createAccount(request);
+        log.info("The account has been saved");
         return new Response("The account has been saved");
 
     }

@@ -65,10 +65,16 @@ public class BookServiceImpl implements IBookService{
         return bookRepository.findByAuthors_AuthorId(authorId);
     }
 
-    //list of books by accountId -- testing
+    //list of books by accountId
     public List<Book> getBooksByAccountId(Long accountId){
         log.info("Ready to find all the books by accountId");
         return bookRepository.findByOrderDetails_Order_Account_AccountId(accountId);
+    }
+
+    //list of books by orderId
+    public List<Book> getBooksByOrderId(Long orderId){
+        log.info("Ready to find all the books by orderId {}",orderId);
+        return bookRepository.findByOrderDetails_Order_OrderId(orderId);
     }
 
     // get book by id

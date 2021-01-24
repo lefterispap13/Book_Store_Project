@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class AccountServiceImpl implements IAccountService{
@@ -62,8 +64,6 @@ public class AccountServiceImpl implements IAccountService{
         log.info("The new account is {}", newAccount);
         log.info("The account has been inserted to the DB");
         return true;
-
-
     }
 
     @Override

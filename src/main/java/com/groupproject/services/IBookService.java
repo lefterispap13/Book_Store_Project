@@ -22,6 +22,9 @@ public interface IBookService {
     //get books by authorId
     List<Book> getBookByAuthorId(Long authorId);
 
+    //get books by orderId -- testing
+    List<Book> getBooksByOrderId(Long orderId);
+
     // create new book
     void createNewBook(BookRequest request);
 
