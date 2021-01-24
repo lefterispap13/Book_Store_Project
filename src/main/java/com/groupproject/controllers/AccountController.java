@@ -53,10 +53,12 @@ public class AccountController {
     @PostMapping(value="/new",consumes = "application/json",
             produces = "application/json")
     public Response createNewAccount(@RequestBody AccountRequest request){
+
         log.info("Ready to create a new Account");
         accountServiceImpl.createAccount(request);
         log.info("The account has been saved");
         return new Response("The account has been saved");
+
     }
 
     // update account with id

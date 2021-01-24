@@ -9,16 +9,26 @@ import com.groupproject.entities.Role;
 import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.RoleRepository;
 import com.groupproject.requests.AccountRequest;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.groupproject.responses.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
-public class AccountServiceImpl implements IAccountService{
+public class AccountServiceImpl implements IAccountService, UserDetailsService {
 
     @Autowired
     private AccountRepository accountRepository;
@@ -26,6 +36,8 @@ public class AccountServiceImpl implements IAccountService{
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Account> getAll() {
@@ -55,12 +67,11 @@ public class AccountServiceImpl implements IAccountService{
 
         Account account = new Account(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                 request.getDateOfBirth(), request.getEmail(), request.getGender(), DEFAULT_INITIAL_COINS, role);
+        account.setPassword(passwordEncoder.encode(request.getPassword()));
         Account newAccount = accountRepository.save(account);
         log.info("The new account is {}", newAccount);
         log.info("The account has been inserted to the DB");
         return true;
-
-
     }
 
     @Override
@@ -122,5 +133,20 @@ public class AccountServiceImpl implements IAccountService{
         }
         log.info("account has not deleted successfully");
         return false;
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account applicationUser = accountRepository.findByUsername(username);
+        if (applicationUser == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        Role role = applicationUser.getRole();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getType()));
+        System.out.println(role.getType());
+        log.info("loadUserByUsername: found match, returning "
+                + applicationUser.getUsername() +" With role " +authorities.toString()
+        );
+        return new User(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
     }
 }

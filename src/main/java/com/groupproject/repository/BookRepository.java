@@ -1,7 +1,6 @@
 package com.groupproject.repository;
 
 import com.groupproject.entities.Book;
-import com.groupproject.entities.OrderDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,10 +18,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //find the books by authorId
     List<Book> findByAuthors_AuthorId(Long authorId);
 
-    //find book by order details
-    List<Book> findByOrderDetails_Order_Account_AccountId(Long accountId);
-
-    //find the books by orderId --testing
-    List<Book> findByOrderDetails_Order_OrderId(Long orderId);
 
 }

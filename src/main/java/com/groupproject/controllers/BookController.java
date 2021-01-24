@@ -1,7 +1,6 @@
 package com.groupproject.controllers;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.groupproject.requests.BookRequest;
 import com.groupproject.responses.BookResponse;
 import com.groupproject.responses.Response;
@@ -42,19 +41,6 @@ public class BookController {
         }
     }
 
-    //list of all the books by orderId --testing
-    @GetMapping(value="/getbyorderid/{orderId}",produces="application/json")
-    public BookResponse getAllBooksByOrderId(@PathVariable Long orderId){
-        log.info("Ready to find all the books by order with id {}",orderId);
-        if(bookService.getBooksByOrderId(orderId).size()==0){
-            log.info("No matched books with the given order id");
-            return new BookResponse("No matched books with the given order id",bookService.getBooksByOrderId(orderId));
-        } else {
-            log.info("Found all the books with this order id {}",orderId);
-            return new BookResponse("Found all the books with this order id",bookService.getBooksByOrderId(orderId));
-        }
-    }
-
     // list of all the books by category
     @GetMapping(value = "/getbycategory/{categoryType}",produces="application/json")
     public BookResponse getAllBooksByCategory(@PathVariable String categoryType){
@@ -65,19 +51,6 @@ public class BookController {
         } else {
             log.info("Found all the books with this category");
             return new BookResponse("Found all the books", bookService.getBookByCategories(categoryType));
-        }
-    }
-
-    //list of all books by accountId --testing
-    @GetMapping(value = "/getbyaccountid/{accountId}",produces="application/json")
-    public BookResponse getAllBooksByAccountId(@PathVariable Long accountId){
-        log.info("Ready to find all the books by account with id {}",accountId);
-        if(bookService.getBooksByAccountId(accountId).size()==0){
-            log.info("Couldn't find any book with this account id {}",accountId);
-            return new BookResponse("Couldn't find any book with this account id",bookService.getBooksByAccountId(accountId));
-        }else{
-            log.info("Found all the books connected to this account id");
-            return new BookResponse("Found all the books", bookService.getBooksByAccountId(accountId));
         }
     }
 
@@ -98,13 +71,7 @@ public class BookController {
     @GetMapping(value="/getbyid/{id}")
     public BookResponse getById(@PathVariable Long id){
         log.info("Ready to find the book with the id {}",id);
-        if (isNull(bookService.getBookById(id))){
-            log.info("There is no book with id {}",id);
-            return new BookResponse("There is no book with this id", bookService.getBookById(id));
-        }else {
-            log.info("Found the book with id {}",id);
-            return new BookResponse("Found the book", bookService.getBookById(id));
-        }
+        return new BookResponse("Found the book", bookService.getBookById(id));
     }
 
     // create a new book with post method

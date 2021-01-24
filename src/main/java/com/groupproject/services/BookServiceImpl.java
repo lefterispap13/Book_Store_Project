@@ -32,9 +32,6 @@ public class BookServiceImpl implements IBookService{
     private OrderDetailsRepository orderDetailsRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
     private PricingRepository pricingRepository;
 
     @Autowired
@@ -63,18 +60,6 @@ public class BookServiceImpl implements IBookService{
     public List<Book> getBookByAuthorId(Long authorId){
         log.info("Ready to find the books by authorId");
         return bookRepository.findByAuthors_AuthorId(authorId);
-    }
-
-    //list of books by accountId
-    public List<Book> getBooksByAccountId(Long accountId){
-        log.info("Ready to find all the books by accountId");
-        return bookRepository.findByOrderDetails_Order_Account_AccountId(accountId);
-    }
-
-    //list of books by orderId
-    public List<Book> getBooksByOrderId(Long orderId){
-        log.info("Ready to find all the books by orderId {}",orderId);
-        return bookRepository.findByOrderDetails_Order_OrderId(orderId);
     }
 
     // get book by id
