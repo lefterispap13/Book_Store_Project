@@ -1,7 +1,6 @@
 package com.groupproject.services;
 
 import static com.groupproject.constants.Constants.DEFAULT_INITIAL_COINS;
-import static com.groupproject.constants.Constants.USER;
 import static java.util.Objects.isNull;
 
 import com.groupproject.entities.Account;
@@ -11,17 +10,15 @@ import com.groupproject.repository.RoleRepository;
 import com.groupproject.requests.AccountRequest;
 import java.util.List;
 
-import com.groupproject.responses.Response;
+import com.groupproject.services.interfaces.IAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Slf4j
 @Service
-public class AccountServiceImpl implements IAccountService{
+public class AccountServiceImpl implements IAccountService {
 
     @Autowired
     private AccountRepository accountRepository;

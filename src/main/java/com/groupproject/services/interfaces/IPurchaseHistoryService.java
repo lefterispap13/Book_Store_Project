@@ -1,4 +1,4 @@
-package com.groupproject.services;
+package com.groupproject.services.interfaces;
 
 import com.groupproject.entities.PurchaseHistory;
 import com.groupproject.requests.PurchaseHistoryRequest;

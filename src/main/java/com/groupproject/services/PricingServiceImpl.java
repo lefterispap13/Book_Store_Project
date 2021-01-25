@@ -3,6 +3,7 @@ package com.groupproject.services;
 import com.groupproject.entities.Pricing;
 import com.groupproject.repository.PricingRepository;
 import com.groupproject.requests.PricingRequest;
+import com.groupproject.services.interfaces.IPricingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @Service
-public class PricingServiceImpl implements IPricingService{
+public class PricingServiceImpl implements IPricingService {
 
     @Autowired
     private PricingRepository pricingRepository;

@@ -5,20 +5,18 @@ import com.groupproject.entities.PurchaseHistory;
 import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.PurchaseHistoryRepository;
 import com.groupproject.requests.PurchaseHistoryRequest;
+import com.groupproject.services.interfaces.IPurchaseHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.Objects.isNull;
 
 @Slf4j
 @Service
-public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService{
+public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService {
 
     @Autowired
     private PurchaseHistoryRepository purchaseHistoryRepository;

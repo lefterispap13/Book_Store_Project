@@ -4,17 +4,18 @@ package com.groupproject.services;
 import com.groupproject.entities.*;
 import com.groupproject.repository.*;
 import com.groupproject.requests.BookRequest;
+import com.groupproject.services.interfaces.IBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Slf4j
 @Service
-public class BookServiceImpl implements IBookService{
+public class BookServiceImpl implements IBookService {
 
     @Autowired
     private BookRepository bookRepository;

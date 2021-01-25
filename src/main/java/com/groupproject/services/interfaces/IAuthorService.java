@@ -1,4 +1,4 @@
-package com.groupproject.services;
+package com.groupproject.services.interfaces;
 
 import com.groupproject.entities.Author;
 import com.groupproject.requests.AuthorRequest;
