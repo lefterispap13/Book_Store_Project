@@ -29,6 +29,7 @@ public class AccountServiceImpl implements IAccountService{
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
