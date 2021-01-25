@@ -99,51 +99,6 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
         return true;
     }
 
-//    @Override    //update method in case we need it
-//    public OrderDetails updateOrderDetails(Long id, OrderDetailsRequest request) {
-//
-//        log.info("Ready to update an existing orderdetails");
-//        if (orderDetailsRepository.findById(id).isPresent()) {
-//            Long orderId= request.getOrderId();
-//            Long bookId= request.getBookId();
-//            Order order=orderRepository.findById(orderId).orElse(null);
-//            Book book=bookRepository.findById(bookId).orElse(null);
-//
-//            //i want to do originalPrice = startingPrice from pricing
-//            double originalPrice = book.getPricing().getStartingPrice();
-//
-//
-//            OrderDetails existingOrderDetails = orderDetailsRepository.findById(id).get();
-//            existingOrderDetails.setOrder(order);
-//            existingOrderDetails.setBook(book);
-//
-//            existingOrderDetails.setDiscountRate(request.getDiscountRate());
-//
-//            existingOrderDetails.setTotalPrice(request.getTotalPrice());
-//
-//            if (isNull(request.getTotalPrice())){
-//                //i want to do totalPrice = originalPrice - (originalPrice * discountRate)
-//                double totalPrice = originalPrice - ( originalPrice * request.getDiscountRate());
-//                existingOrderDetails.setTotalPrice(totalPrice);
-//                OrderDetails updatedOrderDetails = orderDetailsRepository.save(existingOrderDetails);
-//
-//                log.info("The updated OrderDetails is {}", updatedOrderDetails);
-//                log.info("The updated OrderDetails has been inserted to the DB");
-//                return updatedOrderDetails;
-//            }
-//
-//
-//
-//            OrderDetails updatedOrderDetails = orderDetailsRepository.save(existingOrderDetails);
-//
-//            log.info("The updated OrderDetails is {}", updatedOrderDetails);
-//            log.info("The updated OrderDetails has been inserted to the DB");
-//            return updatedOrderDetails;
-//        }
-//        log.info("The order details have not been inserted to the DB");
-//        return null;
-//    }
-
     @Override
     public boolean deleteById(Long id) {
         log.info("Ready to delete an orderDetails");
