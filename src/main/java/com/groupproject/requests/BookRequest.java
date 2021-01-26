@@ -28,6 +28,8 @@ public class BookRequest {
     private List<Long> categoryIds;
     private List<Long> languageIds;
 
+    private Long accountId;
+    private Long bookId;
 
 
 }

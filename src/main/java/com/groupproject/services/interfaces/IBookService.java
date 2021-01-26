@@ -33,4 +33,7 @@ public interface IBookService {
 
     // delete a book from id
     boolean deleteBookById(Long id);
+
+    int checkIfBookIsAlreadyBoughtByAccountId(Long bookId, Long accountId);
+
 }

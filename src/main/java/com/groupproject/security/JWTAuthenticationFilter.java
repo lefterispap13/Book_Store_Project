@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupproject.entities.Account;
+import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -55,6 +56,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication auth) throws IOException, ServletException {
 
         String token = JWT.create()
+                .withAudience(((User) auth.getPrincipal()).getUsername())
                 .withSubject(String.valueOf(((User) auth.getPrincipal()).getAuthorities()))
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
