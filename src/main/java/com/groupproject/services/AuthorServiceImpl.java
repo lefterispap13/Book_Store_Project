@@ -4,6 +4,7 @@ package com.groupproject.services;
 import com.groupproject.entities.Author;
 import com.groupproject.repository.AuthorRepository;
 import com.groupproject.requests.AuthorRequest;
+import com.groupproject.services.interfaces.IAuthorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @Service
-public class AuthorServiceImpl implements IAuthorService{
+public class AuthorServiceImpl implements IAuthorService {
 
     @Autowired
     private AuthorRepository authorRepository;

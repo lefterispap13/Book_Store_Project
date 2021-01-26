@@ -45,6 +45,5 @@ public class Role implements Serializable {
     public Role(Long roleId,String type){
         this.roleId=roleId;
         this.type=type;
-
     }
 }

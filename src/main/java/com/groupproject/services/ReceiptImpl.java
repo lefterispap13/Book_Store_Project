@@ -6,6 +6,7 @@ import com.groupproject.receipts.Receipt;
 import com.groupproject.repository.AccountRepository;
 import com.groupproject.repository.OrderDetailsRepository;
 import com.groupproject.repository.OrderRepository;
+import com.groupproject.services.interfaces.IReceiptService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ReceiptImpl implements IReceiptService{
+public class ReceiptImpl implements IReceiptService {
 
     @Autowired
     private AccountRepository accountRepository;

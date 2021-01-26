@@ -5,6 +5,8 @@ import com.groupproject.repository.BookRepository;
 import com.groupproject.repository.CategoryRepository;
 import com.groupproject.requests.CategoryRequest;
 import java.util.List;
+
+import com.groupproject.services.interfaces.ICategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class CategoryServiceImpl implements ICategoryService{
+public class CategoryServiceImpl implements ICategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;

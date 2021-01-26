@@ -4,17 +4,18 @@ package com.groupproject.services;
 import com.groupproject.entities.*;
 import com.groupproject.repository.*;
 import com.groupproject.requests.BookRequest;
+import com.groupproject.services.interfaces.IBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Slf4j
 @Service
-public class BookServiceImpl implements IBookService{
+public class BookServiceImpl implements IBookService {
 
     @Autowired
     private BookRepository bookRepository;
@@ -30,6 +31,9 @@ public class BookServiceImpl implements IBookService{
 
     @Autowired
     private OrderDetailsRepository orderDetailsRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Autowired
     private PricingRepository pricingRepository;
@@ -60,6 +64,18 @@ public class BookServiceImpl implements IBookService{
     public List<Book> getBookByAuthorId(Long authorId){
         log.info("Ready to find the books by authorId");
         return bookRepository.findByAuthors_AuthorId(authorId);
+    }
+
+    //list of books by accountId
+    public List<Book> getBooksByAccountId(Long accountId){
+        log.info("Ready to find all the books by accountId");
+        return bookRepository.findByOrderDetails_Order_Account_AccountId(accountId);
+    }
+
+    //list of books by orderId
+    public List<Book> getBooksByOrderId(Long orderId){
+        log.info("Ready to find all the books by orderId {}",orderId);
+        return bookRepository.findByOrderDetails_Order_OrderId(orderId);
     }
 
     // get book by id

@@ -3,6 +3,7 @@ package com.groupproject.services;
 import com.groupproject.entities.Role;
 import com.groupproject.repository.RoleRepository;
 import com.groupproject.requests.RoleRequest;
+import com.groupproject.services.interfaces.IRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @Service
-public class RoleServiceImpl implements  IRoleService{
+public class RoleServiceImpl implements IRoleService {
 
     @Autowired
     private RoleRepository roleRepository;
