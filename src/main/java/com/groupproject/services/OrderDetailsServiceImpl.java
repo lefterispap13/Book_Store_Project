@@ -93,7 +93,6 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
         log.info("The new orderDetails is {}", newOrderDetails);
         log.info("The orderDetails have been inserted to the DB");
         log.info("Updating order total coins");
-        // TODO:adding coins to the account-done. is it ok though?
         order = orderServiceImpl.updateOrder(orderId,totalPrice+order.getTotalCoins());
         orderRepository.save(order);
         return true;

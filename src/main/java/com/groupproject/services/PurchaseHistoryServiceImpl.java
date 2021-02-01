@@ -53,11 +53,8 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService {
         purchaseHistoryRepository.save(purchaseHistory);
         log.info("The new purchase has been inserted to the DB");
         log.info("Updating account total coins");
-            // TODO:adding coins to the account-done. is it ok though?
-//         //   double x= purchaseHistory.getPurchasedCoins();
         account = accountServiceImpl.updateAccount(accountId,purchaseHistory.getPurchasedCoins()+account.getCoins());
         accountRepository.save(account);
-        // TODO:adding euros to our bank and subtract them from clients bank account
     }
 
     // update purchase by id
@@ -89,7 +86,6 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService {
             accountRepository.save(account);
         }
         log.info("Purchase has been updated");
-        // TODO:adding or subtracting euros to our bank and the opposite from clients bank account
         return updatedPurchaseHistory;
     }
 
@@ -101,13 +97,11 @@ public class PurchaseHistoryServiceImpl implements IPurchaseHistoryService {
             Long accountId=purchaseHistoryRepository.findById(id).orElse(null).getAccount().getAccountId();
             Account account = accountRepository.findById(accountId).orElse(null);
             double minusCoins=purchaseHistoryRepository.findById(id).orElse(null).getPurchasedCoins();
-//            double eurosReturned=purchaseHistoryRepository.findById(id).orElse(null).getEurosSpent();
             purchaseHistoryRepository.deleteById(id);
             log.info("Purchase has been deleted successfully");
             log.info("Updating account total coins");
             account = accountServiceImpl.updateAccount(accountId,account.getCoins()-minusCoins);
             accountRepository.save(account);
-            // TODO:subtracting euros from our bank and adding them to the client
             return true;
         }
         log.info("Purchase has not been deleted successfully");
